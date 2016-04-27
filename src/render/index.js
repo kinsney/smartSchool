@@ -48,6 +48,6 @@ const render = () =>
   Render.render(nowScene,camera);
 
   stats.end() ;
-  // window.requestAnimationFrame(render);
+  window.requestAnimationFrame(render);
 }
 window.requestAnimationFrame(render);
