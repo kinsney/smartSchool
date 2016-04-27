@@ -1,0 +1,32 @@
+{
+    "building1":
+    {
+        "floors":
+        [
+            {
+                "cabinet":{}
+            },
+            {
+                "sofa":{},
+                "chair":{}
+            }
+        ],
+        "position":{"x":0,"y":3000,"z":0}
+    },
+    "building2":
+    {
+        "floors":
+        [
+            {
+                "door":"door.json"
+            },
+            {
+                "door":"door.json"
+            },
+            {
+                "door":"door.json"
+            }
+        ],
+        "position":{"x":6000,"y":3000,"z":0}
+    }
+}
