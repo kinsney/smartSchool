@@ -1,3 +1,2 @@
-building-system
-===============
-
+# smartSchool
+smartSchool
