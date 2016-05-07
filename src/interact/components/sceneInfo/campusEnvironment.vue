@@ -2,7 +2,6 @@
 	* { font-family: 'PingFang SC','微软雅黑' ;}
 	.widgets
 	{
-		background-color:#f3f9f5;
 		height:100%;
 		h1{font-size:28px; text-align:center;padding-top:20px;}
 		overflow:scroll;

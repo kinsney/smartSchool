@@ -11,22 +11,6 @@
                 "chair":{}
             }
         ],
-        "position":{"x":0,"y":3000,"z":0}
-    },
-    "building2":
-    {
-        "floors":
-        [
-            {
-                "door":"door.json"
-            },
-            {
-                "door":"door.json"
-            },
-            {
-                "door":"door.json"
-            }
-        ],
-        "position":{"x":6000,"y":3000,"z":0}
+        "position":{"x":0,"y":0,"z":0}
     }
 }
