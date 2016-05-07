@@ -11,7 +11,7 @@ $titleS : 12px;
 {
 	position:relative;
 	padding: 10px; margin: 20px auto;
-	width:520px;
+	width:460px;
 	background-color: $colorBg;
 	border:1px solid $colorBorder;
 	box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -53,7 +53,7 @@ $titleS : 12px;
 					font-size:12px;
 					background-color:$colorBt;
 					text-align:center;
-					min-width:100px; height:20px; line-height:20px;
+					min-width:80px; height:20px; line-height:20px;
 				}
 			}
 		}
@@ -69,27 +69,27 @@ $titleS : 12px;
 		<span class="conor conor4"><img src="./img/conor4.png" /></span>
 
 		<div class="cont">
-			<img src="./img/battery.png" />
+			<img src="./img/temp.png" />
 			<div class="vlist">
-				<h3>今日园区总耗电量</h3>
+				<h3>大楼均温</h3>
 				<div class="infoBox">
-					<div class="in"><span v-text="electric"></span></div>
+					<div class="in"><span v-text="temp"></span></div>
 				</div>
 			</div>
 			<span class="vLine"></span>
-			<img src="./img/money.png" />
+			<img src="./img/bigWindMachine.png" />
 			<div class="vlist">
-				<h3>今日园区总费用</h3>
+				<h3>大楼新风机</h3>
 				<div class="infoBox">
-					<div class="in"><span v-text="money"></span></div>
+					<div class="in"><span v-text="wind"></span></div>
 				</div>
 			</div>
 			<span class="vLine"></span>
-			<img src="./img/calorie.png" />
+			<img src="./img/centAircon.png" />
 			<div class="vlist">
-				<h3>今日园区总耗热量</h3>
+				<h3>大楼中央空调</h3>
 				<div class="infoBox">
-					<div class="in"><span v-text="calorie"></span></div>
+					<div class="in"><span v-text="aircon"></span></div>
 				</div>
 			</div>
 		</div>
@@ -100,9 +100,9 @@ $titleS : 12px;
 	module.exports =
 	{
 		data() {return{
-			electric:"654 kwh",
-			money:"654 ¥",
-			calorie:"1293 kj"
+			temp:"23°C 舒适",
+			wind:"654 m³",
+			aircon:"1293 kj"
 		}},
 		vuex:
 		{

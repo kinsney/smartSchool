@@ -1,13 +1,11 @@
 <style lang="sass" scoped>
 $green : #6cf09c;
 $red : #f85656;
-$black : #000000;
-$yellow : #ffe400;
 $colorLine : #278d4c;
 $colorBg : rgba(0,0,0,0.75);
 
 * { font-family: 'PingFang SC','微软雅黑' ;}
-.tag-energy
+.smog-sensor
 {
 	position: absolute;
 	border:1px solid $red;
@@ -25,7 +23,6 @@ $colorBg : rgba(0,0,0,0.75);
 		{
 			position: relative;
 			color: $green; font-size:16px;
-			text-align:center;
 			*{display:inline-block; vertical-align:middle;}
 			img{ position:absolute; right:0; top:3px; height:15px; }
 		}
@@ -51,11 +48,12 @@ $colorBg : rgba(0,0,0,0.75);
 			.dot-l { left:0; top:-1px; }
 			.dot-r { right:0; top:-1px; }
 		}
-		.energyData
+		.smogData
 		{
-			overflow:hidden;
-			height:0;
-			background-color:rgba(0,0,0,0.2); 
+			overflow:hidden; height:0; color:white; font-size:12px; text-align:center;
+			span{display:inline-block; vertical-align:middle;margin-top:10px;}
+			.normal {padding:2px; width:60px; background-color:rgba(255,255,255,0.1);}
+			.danger {background-color:rgba(250,85,85,0.5);}
 		}
 		.v-dotline
 		{
@@ -71,21 +69,28 @@ $colorBg : rgba(0,0,0,0.75);
 				border:1px solid black;
 			}
 		}
+		@mixin state($color)
+		{
+			border-bottom-color:$color;
+			.v-dotline {background-color: $color; .dot {background-color: $color; } }
+		}
+		&.on { @include state($green); }
+		&.error { @include state($red); }
 	}
 }
 </style>
 
 <template>
-	<div class="tag-energy" :style="{left:pos.x+'px',top:pos.y+'px'}">
-		<div class="info" @mouseenter="show" @mouseleave="hide" v-el:info>
+	<div class="smog-sensor" :style="{left:pos.x+'px',top:pos.y+'px'}">
+		<div class="info" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
-				<span v-show="!open" v-text="'日均能耗:'+energy"></span>
-				<span v-show="open">能耗趋势表</span>
-				<img v-show="open" src="img/more.png" />
+				<span>烟雾传感器</span>
+				<img src="img/more.png" />
 			</div>
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
-			<div class="energyData">
-				
+			<div class="smogData">
+				<span>烟雾浓度</span>
+				<span class="normal" :class="{danger:danger}" v-text="smog"></span>
 			</div>
 			<div class="d">
 				<img src="img/locate.png" />
@@ -101,28 +106,28 @@ $colorBg : rgba(0,0,0,0.75);
 	module.exports =
 	{
 		data() {return{
-			energy:"8476J",
-			open:false,
+			danger:false,
+			smog:"1691 正常",
 			locate:"教四楼"
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}}
+			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
+			state: { type:String, default:"on" } // on error
 		},
 		methods:
 		{
 			hide() 
-			{ 
-				this.open = false;
+			{
+				if(this.state=='error') return;
 				var ele = this.$els.info;
-				$(ele).stop().animate({width:'130px',left:'-82px'});
-				$(ele).find('.energyData').stop().animate({height:0,marginBottom:0});
+				$(ele).find('.smogData').stop().animate({height:0});
 			},
 			show() 
 			{
+				if(this.state=='error') return;
 				var ele = this.$els.info;
-				$(ele).stop().animate({width:'280px',left:'-157px'});
-				$(ele).find('.energyData').stop().animate({height:'150px',marginBottom:'7px'},()=>this.open=true);
+				$(ele).find('.smogData').stop().animate({height:'42px'});
 			}
 		}
 	}

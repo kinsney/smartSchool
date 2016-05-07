@@ -11,7 +11,7 @@ $titleS : 12px;
 {
 	position:relative;
 	padding: 10px; margin: 20px auto;
-	width:620px;
+	width:800px;
 	background-color: $colorBg;
 	border:1px solid $colorBorder;
 	box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -83,8 +83,8 @@ $titleS : 12px;
 		<div class="cont">
 			<div class="vlist">
 				<div class="item">
-					<div class="icon"><img src="./img/camera.png" /></div>
-					<h3 style="width:72px;">园区摄像头</h3>
+					<div class="icon"><img src="./img/breaker.png" /></div>
+					<h3 style="width:60px;">断路器</h3>
 					<div class="infoBox">
 						<div class="in">
 							<span v-text="workingCamera"></span>
@@ -93,13 +93,11 @@ $titleS : 12px;
 					</div>
 				</div>
 				<div class="item d">
-					<div class="icon"><img src="./img/lamp.png" /></div>
-					<h3 style="width:72px;">园区路灯</h3>
+					<div class="icon"><img src="./img/equipment.png" /></div>
+					<h3 style="width:60px;">教学设备</h3>
 					<div class="infoBox">
 						<div class="in">
-							<span v-text="workingLamp"></span>
-							<span v-text="breakdownLamp"></span>
-							<span v-text="overloadLamp"></span>
+							<span v-text="windState"></span>
 						</div>
 					</div>
 				</div>
@@ -107,8 +105,8 @@ $titleS : 12px;
 			<span class="vLine"></span>
 			<div class="vlist">
 				<div class="item">
-					<div class="icon"><img src="./img/fence.png" /></div>
-					<h3 style="width:60px;">红外围栏</h3>
+					<div class="icon"><img src="./img/camera.png" /></div>
+					<h3 style="width:45px;">摄像头</h3>
 					<div class="infoBox">
 						<div class="in">
 							<span v-text="workingFence"></span>
@@ -117,8 +115,30 @@ $titleS : 12px;
 					</div>
 				</div>
 				<div class="item d">
-					<div class="icon"><img src="./img/breaker.png" /></div>
-					<h3 style="width:60px;">断路器</h3>
+					<div class="icon"><img src="./img/sensor.png" /></div>
+					<h3 style="width:45px;">传感器</h3>
+					<div class="infoBox">
+						<div class="in">
+							<span v-text="overloadBreaker"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<span class="vLine"></span>
+			<div class="vlist">
+				<div class="item">
+					<div class="icon"><img src="./img/aircon.png" /></div>
+					<h3 style="width:30px;">空调</h3>
+					<div class="infoBox">
+						<div class="in">
+							<span v-text="workingFence"></span>
+							<span v-text="breakdownFence"></span>
+						</div>
+					</div>
+				</div>
+				<div class="item d">
+					<div class="icon"><img src="./img/roomLamp.png" /></div>
+					<h3 style="width:30px;">灯泡</h3>
 					<div class="infoBox">
 						<div class="in">
 							<span v-text="overloadBreaker"></span>
@@ -136,9 +156,7 @@ $titleS : 12px;
 		data() {return{
 			workingCamera:"123 正常",
 			breakdownCamera:"2 故障",
-			workingLamp:"123 正常",
-			breakdownLamp:"2 故障",
-			overloadLamp:"6 超负荷",
+			windState:"正常运作",
 			workingFence:"23 正常",
 			breakdownFence:"4 故障",
 			overloadBreaker:"12 超负荷"

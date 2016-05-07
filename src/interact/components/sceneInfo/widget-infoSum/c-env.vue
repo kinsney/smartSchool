@@ -11,7 +11,7 @@ $titleS : 12px;
 {
 	position:relative;
 	padding: 10px; margin: 20px auto;
-	width:560px;
+	width:540px;
 	background-color: $colorBg;
 	border:1px solid $colorBorder;
 	box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -26,7 +26,6 @@ $titleS : 12px;
 		&.conor3{ right:-4px; bottom:-6px; }
 		&.conor4{ left:-4px; bottom:-6px; }
 	}
-
 	.cont
 	{
 		
@@ -90,7 +89,7 @@ $titleS : 12px;
 
 		<div class="cont">
 			<div class="v1">
-				<img src="./img/weather1.png" />
+				<img src="./img/weather.png" />
 				<div class="weather">
 					<div class="u"><span v-text="temp.range"></span></div>
 					<div class="d"><span v-text="weather.tag"></span></div>

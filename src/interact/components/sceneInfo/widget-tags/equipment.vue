@@ -4,16 +4,17 @@ $red : #f85656;
 $black : #000000;
 $colorLine : #278d4c;
 $colorBg : rgba(0,0,0,0.75);
+$colorBt : #2fae5d;
 
 * { font-family: 'PingFang SC','微软雅黑' ;}
-.tag-door
+.tag-equipment
 {
 	position: absolute;
 	border:1px solid $red;
 	.info
 	{
-		position:absolute; bottom:25px; left:-82px;
-		width:130px;
+		position:absolute; bottom:25px; left:-87px;
+		width:140px;
 		padding:12px 17px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
@@ -49,6 +50,24 @@ $colorBg : rgba(0,0,0,0.75);
 			.dot-l { left:0; top:-1px; }
 			.dot-r { right:0; top:-1px; }
 		}
+		.btn
+		{
+			box-sizing:border-box;
+			padding:2px; margin: 0 0 7px;
+			border-radius:3px;
+			cursor: pointer;
+			.in
+			{
+				padding: 2px;
+				font-size:12px; color:white;
+				text-align:center;
+				min-width:80px; height:20px; line-height:20px;
+			}
+
+			&.btnon { border:1px solid $colorBt; .in{background-color:$colorBt;} }
+			&.btnoff { border:1px solid rgba(0,0,0,0.3); .in{background-color:rgba(0,0,0,0.3);} }
+			&.btnerror { border:1px solid $red; .in{background-color:rgba(0,0,0,0.3);} }
+		}
 		.v-dotline
 		{
 			position:absolute; bottom: -25px; left:50%;
@@ -76,13 +95,27 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-door" :style="{left:pos.x+'px',top:pos.y+'px'}">
-		<div class="info" :class="state" v-el:info>
+	<div class="tag-equipment" :style="{left:pos.x+'px',top:pos.y+'px'}">
+		<div class="info" :class="sumState" v-el:info>
 			<div class="u">
-				<span v-text="'断路器:'+statetag[state]"></span>
+				<span>教学设备</span>
 				<img src="img/more.png" />
 			</div>
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
+			<div class="btn" :class="'btn'+state.c" eqmt="c">
+				<div class="in">
+					<span v-show="state.c=='off'">打开电脑</span>
+					<span v-show="state.c=='on'">关闭电脑</span>
+					<span v-show="state.c=='error'">电脑故障</span>
+				</div>
+			</div>
+			<div class="btn" :class="'btn'+state.p" eqmt="p">
+				<div class="in">
+					<span v-show="state.p=='off'">打开投影仪</span>
+					<span v-show="state.p=='on'">关闭投影仪</span>
+					<span v-show="state.p=='error'">投影仪故障</span>
+				</div>
+			</div>
 			<div class="d">
 				<img src="img/locate.png" />
 				<span v-text="locate"></span>
@@ -97,15 +130,34 @@ $colorBg : rgba(0,0,0,0.75);
 	module.exports =
 	{
 		data() {return{
-			isOpen:false,
-			statetag:{on:"正常",off:"已关闭",error:"故障"},
 			locate:"教四楼"
 		}},
+		computed:
+		{
+			sumState()
+			{
+				if(this.state.c=='error'||this.state.p=='error') return 'error';
+				if(this.state.c=='on'||this.state.p=='on') return 'on';
+				else return 'off';
+			}
+		},
 		props:
 		{
 			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on error
+			state: { type:Object, default:{c:'on',p:'on'} } // on off error
 		},
-		methods: {}
+		methods: {},
+		ready()
+		{
+			var ele = this.$els.info;
+			var _this = this;
+			$(ele).find('.btn').click(function()
+			{
+				if($(this).hasClass('btnerror')) return;
+				var eqmt = $(this).attr('eqmt');
+				if($(this).hasClass('btnon')) _this.state[eqmt] = 'off';
+				if($(this).hasClass('btnoff')) _this.state[eqmt] = 'on';
+			});
+		}
 	}
 </script>

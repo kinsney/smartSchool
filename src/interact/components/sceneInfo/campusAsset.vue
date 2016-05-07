@@ -11,7 +11,6 @@
 <template>
 	<div class="widgets">
 		<h1 v-text="nowRoute"></h1>
-		<tag-breaker></tag-breaker>
 	</div>
 </template>
 
@@ -20,7 +19,6 @@
 	{
 		components:
 		{
-			tagBreaker: require('./widget-tags/breaker.vue')
 		},
 		vuex:
 		{

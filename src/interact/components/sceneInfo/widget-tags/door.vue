@@ -2,12 +2,11 @@
 $green : #6cf09c;
 $red : #f85656;
 $black : #000000;
-$yellow : #ffe400;
 $colorLine : #278d4c;
 $colorBg : rgba(0,0,0,0.75);
 
 * { font-family: 'PingFang SC','微软雅黑' ;}
-.tag-energy
+.tag-door
 {
 	position: absolute;
 	border:1px solid $red;
@@ -25,7 +24,6 @@ $colorBg : rgba(0,0,0,0.75);
 		{
 			position: relative;
 			color: $green; font-size:16px;
-			text-align:center;
 			*{display:inline-block; vertical-align:middle;}
 			img{ position:absolute; right:0; top:3px; height:15px; }
 		}
@@ -51,12 +49,6 @@ $colorBg : rgba(0,0,0,0.75);
 			.dot-l { left:0; top:-1px; }
 			.dot-r { right:0; top:-1px; }
 		}
-		.energyData
-		{
-			overflow:hidden;
-			height:0;
-			background-color:rgba(0,0,0,0.2); 
-		}
 		.v-dotline
 		{
 			position:absolute; bottom: -25px; left:50%;
@@ -71,22 +63,26 @@ $colorBg : rgba(0,0,0,0.75);
 				border:1px solid black;
 			}
 		}
+		@mixin state($color)
+		{
+			border-bottom-color:$color;
+			.v-dotline {background-color: $color; .dot {background-color: $color; } }
+		}
+		&.on { @include state($green); }
+		&.off { @include state($black); }
 	}
 }
 </style>
 
 <template>
-	<div class="tag-energy" :style="{left:pos.x+'px',top:pos.y+'px'}">
-		<div class="info" @mouseenter="show" @mouseleave="hide" v-el:info>
+	<div class="tag-door" :style="{left:pos.x+'px',top:pos.y+'px'}">
+		<div class="info" :class="state" v-el:info>
 			<div class="u">
-				<span v-show="!open" v-text="'日均能耗:'+energy"></span>
-				<span v-show="open">能耗趋势表</span>
-				<img v-show="open" src="img/more.png" />
+				<span v-show="state=='off'">点击模型开门</span>
+				<span v-show="state=='on'">点击模型关门</span>
+				<img src="img/more.png" />
 			</div>
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
-			<div class="energyData">
-				
-			</div>
 			<div class="d">
 				<img src="img/locate.png" />
 				<span v-text="locate"></span>
@@ -101,29 +97,13 @@ $colorBg : rgba(0,0,0,0.75);
 	module.exports =
 	{
 		data() {return{
-			energy:"8476J",
-			open:false,
 			locate:"教四楼"
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}}
+			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
+			state: { type:String, default:"on" } // on off
 		},
-		methods:
-		{
-			hide() 
-			{ 
-				this.open = false;
-				var ele = this.$els.info;
-				$(ele).stop().animate({width:'130px',left:'-82px'});
-				$(ele).find('.energyData').stop().animate({height:0,marginBottom:0});
-			},
-			show() 
-			{
-				var ele = this.$els.info;
-				$(ele).stop().animate({width:'280px',left:'-157px'});
-				$(ele).find('.energyData').stop().animate({height:'150px',marginBottom:'7px'},()=>this.open=true);
-			}
-		}
+		methods: {}
 	}
 </script>
