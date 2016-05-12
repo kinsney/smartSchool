@@ -83,7 +83,7 @@ $itemW : 200px;
 </style>
 
 <template>
-  <div class="v-bottomBar">
+  <div class="v-bottomBar" @mousedown.stop="">
 	<ul>
 		<template v-for="item in items">
 			<li class="separate"><img src="./img/bottomBar/seprate.png" /></li>

@@ -109,7 +109,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-camera" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide">
+	<div class="tag-camera" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
 		<div class="tag" @mouseenter="show">
 			<img v-if="state=='on'" src="img/camera-on.png" />
 			<img v-if="state=='off'" src="img/camera-off.png" />

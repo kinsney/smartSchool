@@ -76,7 +76,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-door" :style="{left:pos.x+'px',top:pos.y+'px'}">
+	<div class="tag-door" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" v-el:info>
 			<div class="u">
 				<span v-text="'断路器:'+statetag[state]"></span>

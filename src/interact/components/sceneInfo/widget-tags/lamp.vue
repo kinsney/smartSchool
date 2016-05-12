@@ -80,7 +80,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-lamp" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide">
+	<div class="tag-lamp" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
 		<div class="tag" @mouseenter="show">
 			<img v-if="state=='on'" src="img/lamp-on.png" />
 			<img v-if="state=='off'" src="img/lamp-off.png" />

@@ -95,7 +95,7 @@ $colorBt : #2fae5d;
 </style>
 
 <template>
-	<div class="tag-equipment" :style="{left:pos.x+'px',top:pos.y+'px'}">
+	<div class="tag-equipment" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="sumState" v-el:info>
 			<div class="u">
 				<span>教学设备</span>

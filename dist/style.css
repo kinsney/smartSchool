@@ -25,13 +25,4 @@ html, body {
   height: 100%;
   z-index: 10;
 }
-#stats {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 5;
-}
 
-[v-cloak] {
-  display: none;
-}

@@ -47,6 +47,7 @@ $marginSide : 50px;
 		{
 			width: 400px;
 			margin:0 auto;
+			z-index:1000;
 			position: relative;
 			img { display:block; margin:0 auto; height:80px;}
 			h2
@@ -77,7 +78,7 @@ $marginSide : 50px;
 </style>
 
 <template>
-	<div class="v-topBar">
+	<div class="v-topBar" @mousedown.stop="">
 		<div class="leftPart">
 			<span>游客模式</span>
 		</div>

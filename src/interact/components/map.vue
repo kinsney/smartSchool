@@ -18,7 +18,7 @@ $size : 200px;
 </style>
 
 <template>
-	<div class="v-mapBox" v-show="isCampus">
+	<div class="v-mapBox" v-show="isCampus"  @mousedown.stop="">
 		<img src="./img/map/map.png" />
 	</div>
 </template>

@@ -74,7 +74,7 @@ $titleS : 12px;
 </style>
 
 <template>
-	<div class="infoSum-d">
+	<div class="infoSum-d" @mousedown.stop="">
 		<span class="conor conor1"><img src="./img/conor1.png" /></span>
 		<span class="conor conor2"><img src="./img/conor2.png" /></span>
 		<span class="conor conor3"><img src="./img/conor3.png" /></span>

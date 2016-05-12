@@ -47,7 +47,7 @@ const render = () =>
   raycast(nowScene);
   Render.render(nowScene,camera);
 
-  stats.end() ;
+  stats.end();
   window.requestAnimationFrame(render);
 }
 window.requestAnimationFrame(render);
