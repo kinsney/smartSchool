@@ -71,7 +71,7 @@ $titleS : 12px;
 		<div class="cont">
 			<img src="./img/battery.png" />
 			<div class="vlist">
-				<h3>今日园区总耗电量</h3>
+				<h3>今日大楼总耗电量</h3>
 				<div class="infoBox">
 					<div class="in"><span v-text="electric"></span></div>
 				</div>
@@ -79,7 +79,7 @@ $titleS : 12px;
 			<span class="vLine"></span>
 			<img src="./img/money.png" />
 			<div class="vlist">
-				<h3>今日园区总费用</h3>
+				<h3>今日大楼总费用</h3>
 				<div class="infoBox">
 					<div class="in"><span v-text="money"></span></div>
 				</div>
@@ -87,7 +87,7 @@ $titleS : 12px;
 			<span class="vLine"></span>
 			<img src="./img/calorie.png" />
 			<div class="vlist">
-				<h3>今日园区总耗热量</h3>
+				<h3>今日大楼总耗热量</h3>
 				<div class="infoBox">
 					<div class="in"><span v-text="calorie"></span></div>
 				</div>

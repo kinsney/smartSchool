@@ -8,19 +8,30 @@
 </style>
 
 <template>
-	<div class="widgets">
+	<div class="widgets" v-el:obj>
 		<h1 v-text="nowRoute"></h1>
-		<tag-breaker></tag-breaker>
+		<tag state="off" :pos="{x:pos.x,y:pos.y}"></tag>
 	</div>
 </template>
 
 <script>
+	const getPos = require('../../getPos.js');
 	module.exports =
 	{
-		components:
+		data() {return{
+			haha:{x:100,y:200},
+			position:{x:0,y:3000,z:0},
+			cameraPos:require('../../../render/controller/camera.js').position
+		}},
+		computed:
 		{
-			tagBreaker: require('./widget-tags/breaker.vue')
+			pos()
+			{
+				var ranbingluan = this.cameraPos.x;
+				return getPos(this.position);
+			}
 		},
+		components: {tag: require('./widget-tags/energy.vue')},
 		vuex:
 		{
 			getters:

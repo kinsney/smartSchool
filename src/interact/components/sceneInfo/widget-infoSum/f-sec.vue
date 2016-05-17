@@ -11,7 +11,7 @@ $titleS : 12px;
 {
 	position:relative;
 	padding: 10px; margin: 20px auto;
-	width:540px;
+	width:550px;
 	background-color: $colorBg;
 	border:1px solid $colorBorder;
 	box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -30,10 +30,10 @@ $titleS : 12px;
 	.cont
 	{
 		position:relative; 
-		height:26px;
+		height:57px;
 		text-align:center;
 
-		&>* { height:100%; display:inline-block; vertical-align:middle; margin:0 5px;}
+		&>* {display:inline-block; vertical-align:middle; margin:0 5px;}
 		&>img { height:20px;}
 
 		.vLine {height:100%; width:1px; background-color: $colorLt;}
@@ -52,6 +52,17 @@ $titleS : 12px;
 				padding:0 10px;
 				min-width:80px; height:20px; line-height:20px;
 			}
+		}
+
+		.r
+		{
+			.u,.d
+			{
+				&>* { display:inline-block; vertical-align:middle; margin:0 5px; }
+				&>img { height:20px;}
+				.infoBox .in{min-width:110px;}
+			}
+			.d { margin-top:5px; }
 		}
 	}
 }
@@ -73,9 +84,19 @@ $titleS : 12px;
 				<div class="in"><span v-text="breakdown"></span></div>
 			</div>
 			<span class="vLine"></span>
-			<img src="./img/warn.png" />
-			<div class="infoBox">
-				<div class="in"><span v-text="warning"></span></div>
+			<div class="r">
+				<div class="u">
+					<img src="./img/warn.png" />
+					<div class="infoBox">
+						<div class="in"><span v-text="warning"></span></div>
+					</div>
+				</div>
+				<div class="d">
+					<img src="./img/door.png" />
+					<div class="infoBox">
+						<div class="in"><span v-text="doorShut"></span></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -85,9 +106,10 @@ $titleS : 12px;
 	module.exports =
 	{
 		data() {return{
-			working:"123个园区摄像头正在工作中",
+			working:"10个大楼摄像头正在工作中",
 			breakdown:"2个摄像头故障",
-			warning:"5条待处理园区警报"
+			warning:"5条待处理大楼警报",
+			doorShut:"2 间教室门没关"
 		}},
 		vuex:
 		{

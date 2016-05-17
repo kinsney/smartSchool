@@ -11,7 +11,7 @@ $titleS : 12px;
 {
 	position:relative;
 	padding: 10px; margin: 20px auto;
-	width:620px;
+	width:570px;
 	background-color: $colorBg;
 	border:1px solid $colorBorder;
 	box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -44,13 +44,7 @@ $titleS : 12px;
 			.item
 			{
 				&>* {display:inline-block; vertical-align:middle; margin:0 5px;}
-				.icon
-				{
-					width:25px;
-					text-align:center;
-					img { display:inline-block; height:20px;}
-				}
-				h3{ font-size:14px; margin:0; height:20px; line-height:20px;}
+				h3{ font-size:14px; margin:0; width:60px; height:20px; line-height:20px;}
 				.infoBox
 				{
 					box-sizing:border-box;
@@ -62,7 +56,7 @@ $titleS : 12px;
 						font-size:12px;
 						background-color:$colorBt;
 						text-align:center;
-						min-width:130px; height:20px; line-height:20px;
+						min-width:80px; height:20px; line-height:20px;
 						span{display:inline-block; min-width:60px;}
 					}
 				}
@@ -83,46 +77,45 @@ $titleS : 12px;
 		<div class="cont">
 			<div class="vlist">
 				<div class="item">
-					<div class="icon"><img src="./img/camera.png" /></div>
-					<h3 style="width:72px;">园区摄像头</h3>
+					<h3>楼层均温</h3>
 					<div class="infoBox">
-						<div class="in">
-							<span v-text="workingCamera"></span>
-							<span v-text="breakdownCamera"></span>
-						</div>
+						<div class="in"> <span v-text="tempAverage"></span> </div>
 					</div>
 				</div>
 				<div class="item d">
-					<div class="icon"><img src="./img/lamp.png" /></div>
-					<h3 style="width:72px;">园区路灯</h3>
+					<h3>楼层湿度</h3>
 					<div class="infoBox">
-						<div class="in">
-							<span v-text="workingLamp"></span>
-							<span v-text="breakdownLamp"></span>
-							<span v-text="overloadLamp"></span>
-						</div>
+						<div class="in"> <span v-text="hum"></span> </div>
 					</div>
 				</div>
 			</div>
 			<span class="vLine"></span>
 			<div class="vlist">
 				<div class="item">
-					<div class="icon"><img src="./img/fence.png" /></div>
-					<h3 style="width:60px;">红外围栏</h3>
+					<h3>空气质量</h3>
 					<div class="infoBox">
-						<div class="in">
-							<span v-text="workingFence"></span>
-							<span v-text="breakdownFence"></span>
-						</div>
+						<div class="in"> <span v-text="AQI"></span> </div>
 					</div>
 				</div>
 				<div class="item d">
-					<div class="icon"><img src="./img/breaker.png" /></div>
-					<h3 style="width:60px;">断路器</h3>
+					<h3>CO₂浓度</h3>
 					<div class="infoBox">
-						<div class="in">
-							<span v-text="overloadBreaker"></span>
-						</div>
+						<div class="in"> <span v-text="CO2"></span> </div>
+					</div>
+				</div>
+			</div>
+			<span class="vLine"></span>
+			<div class="vlist">
+				<div class="item">
+					<h3>VOC浓度</h3>
+					<div class="infoBox">
+						<div class="in"> <span v-text="VOC"></span> </div>
+					</div>
+				</div>
+				<div class="item d">
+					<h3>光照条件</h3>
+					<div class="infoBox">
+						<div class="in"> <span v-text="light"></span> </div>
 					</div>
 				</div>
 			</div>
@@ -134,14 +127,12 @@ $titleS : 12px;
 	module.exports =
 	{
 		data() {return{
-			workingCamera:"123 正常",
-			breakdownCamera:"2 故障",
-			workingLamp:"123 正常",
-			breakdownLamp:"2 故障",
-			overloadLamp:"6 超负荷",
-			workingFence:"23 正常",
-			breakdownFence:"4 故障",
-			overloadBreaker:"12 超负荷"
+			tempAverage:"16°C 怡人",
+			hum:"234RH%",
+			AQI:"23 优",
+			CO2:"223/m³",
+			VOC:"223/m³",
+			light:"23 明亮"
 		}},
 		vuex:
 		{

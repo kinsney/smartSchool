@@ -2,25 +2,22 @@
 $green : #6cf09c;
 $red : #f85656;
 $black : #000000;
-$yellow : #ffe400;
 $colorLine : #278d4c;
 $colorBg : rgba(0,0,0,0.75);
 
 * { font-family: 'PingFang SC','微软雅黑' ;}
-.tag-lamp
+.tag-door
 {
 	position: absolute;
-	height:100px;
-	.tag { height:100%; img{height:100%;} }
+	border:1px solid $red;
 	.info
 	{
-		position:absolute; bottom:70px; left:-64px;
-		display:none; opacity:0; filter:alpha(opacity=0);
-		width:180px;
+		position:absolute; bottom:25px; left:-82px;
+		width:130px;
 		padding:12px 17px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
-		border-bottom: 2px solid transparent;
+		border-bottom: 3px solid $green;
 		font-weight:lighter;
 		
 		.u
@@ -28,13 +25,13 @@ $colorBg : rgba(0,0,0,0.75);
 			position: relative;
 			color: $green; font-size:16px;
 			*{display:inline-block; vertical-align:middle;}
-			img{ position:absolute; right:0; height:15px; }
+			img{ position:absolute; right:0; top:3px; height:15px; }
 		}
 		.d
 		{
-			color: white; font-size:14px;
+			color: white; font-size:14px; text-align: center;
 			*{display:inline-block; vertical-align:middle;}
-			img{height:14px; margin-right:5px;}
+			img{height:14px; margin-right:10px;}
 		}
 
 		.h-dotline
@@ -59,13 +56,13 @@ $colorBg : rgba(0,0,0,0.75);
 			background-color: $green;
 			.dot 
 			{ 
-				position:absolute; left:-1px; bottom:0;
-				height:3px; width:3px;  
+				position:absolute; left:-4px; bottom:0;
+				height:7px; width:7px;  
 				border-radius: 4px;
 				background-color: $green;
+				border:1px solid black;
 			}
 		}
-		
 		@mixin state($color)
 		{
 			border-bottom-color:$color;
@@ -73,23 +70,16 @@ $colorBg : rgba(0,0,0,0.75);
 		}
 		&.on { @include state($green); }
 		&.off { @include state($black); }
-		&.error { @include state($red); }
-		&.overload { @include state($yellow); }
 	}
 }
 </style>
 
 <template>
-	<div class="tag-lamp" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
-		<div class="tag" @mouseenter="show">
-			<img v-if="state=='on'" src="img/lamp-on.png" />
-			<img v-if="state=='off'" src="img/lamp-off.png" />
-			<img v-if="state=='error'" src="img/lamp-error.png" />
-			<img v-if="state=='overload'" src="img/lamp-overload.png" />
-		</div>
+	<div class="tag-door" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" v-el:info>
 			<div class="u">
-				<span v-text="statetag[state]"></span>
+				<span v-show="state=='off'">点击模型开门</span>
+				<span v-show="state=='on'">点击模型关门</span>
 				<img src="img/more.png" />
 			</div>
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
@@ -107,31 +97,13 @@ $colorBg : rgba(0,0,0,0.75);
 	module.exports =
 	{
 		data() {return{
-			statetag:{on:"开启中",off:"关闭中",error:"故障中，请维修",overload:"超负荷"},
-			locate:"教四楼南侧第二个路灯",
-			timer:null
+			locate:"教四楼"
 		}},
 		props:
 		{
 			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on off error
+			state: { type:String, default:"on" } // on off
 		},
-		methods:
-		{
-			hide() 
-			{ 
-				var ele = this.$els.info
-				this.timer = setTimeout(function()
-				{
-					$(ele).stop().fadeOut(100,function(){$(this).css({opacity:0,bottom:'70px'});});
-				},100);
-			},
-			show() 
-			{
-				var ele = this.$els.info
-				clearTimeout(this.timer);
-				$(ele).stop().css({display:'block'}).animate({opacity:1,bottom:'90px'},300);
-			}
-		}
+		methods: {}
 	}
 </script>

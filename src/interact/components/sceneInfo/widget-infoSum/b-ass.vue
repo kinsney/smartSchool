@@ -11,7 +11,7 @@ $titleS : 12px;
 {
 	position:relative;
 	padding: 10px; margin: 20px auto;
-	width:620px;
+	width:570px;
 	background-color: $colorBg;
 	border:1px solid $colorBorder;
 	box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -84,7 +84,7 @@ $titleS : 12px;
 			<div class="vlist">
 				<div class="item">
 					<div class="icon"><img src="./img/camera.png" /></div>
-					<h3 style="width:72px;">园区摄像头</h3>
+					<h3 style="width:72px;">大楼摄像头</h3>
 					<div class="infoBox">
 						<div class="in">
 							<span v-text="workingCamera"></span>
@@ -93,13 +93,11 @@ $titleS : 12px;
 					</div>
 				</div>
 				<div class="item d">
-					<div class="icon"><img src="./img/lamp.png" /></div>
-					<h3 style="width:72px;">园区路灯</h3>
+					<div class="icon"><img src="./img/windMachine.png" /></div>
+					<h3 style="width:72px;">大楼新风机</h3>
 					<div class="infoBox">
 						<div class="in">
-							<span v-text="workingLamp"></span>
-							<span v-text="breakdownLamp"></span>
-							<span v-text="overloadLamp"></span>
+							<span v-text="windState"></span>
 						</div>
 					</div>
 				</div>
@@ -136,9 +134,7 @@ $titleS : 12px;
 		data() {return{
 			workingCamera:"123 正常",
 			breakdownCamera:"2 故障",
-			workingLamp:"123 正常",
-			breakdownLamp:"2 故障",
-			overloadLamp:"6 超负荷",
+			windState:"正常运作",
 			workingFence:"23 正常",
 			breakdownFence:"4 故障",
 			overloadBreaker:"12 超负荷"

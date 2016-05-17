@@ -7,14 +7,14 @@ $colorLine : #278d4c;
 $colorBg : rgba(0,0,0,0.75);
 
 * { font-family: 'PingFang SC','微软雅黑' ;}
-.tag-lamp
+.tag-energy
 {
 	position: absolute;
 	border:1px solid $red;
 	.info
 	{
-		position:absolute; bottom:25px; left:-77px;
-		width:120px;
+		position:absolute; bottom:25px; left:-82px;
+		width:130px;
 		padding:12px 17px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
@@ -27,7 +27,7 @@ $colorBg : rgba(0,0,0,0.75);
 			color: $green; font-size:16px;
 			text-align:center;
 			*{display:inline-block; vertical-align:middle;}
-			img{ position:absolute; right:0; height:15px; }
+			img{ position:absolute; right:0; top:3px; height:15px; }
 		}
 		.d
 		{
@@ -76,7 +76,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-lamp" :style="{left:pos.x+'px',top:pos.y+'px'}">
+	<div class="tag-energy" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span v-show="!open" v-text="'日均能耗:'+energy"></span>
@@ -115,7 +115,7 @@ $colorBg : rgba(0,0,0,0.75);
 			{ 
 				this.open = false;
 				var ele = this.$els.info;
-				$(ele).stop().animate({width:'120px',left:'-77px'});
+				$(ele).stop().animate({width:'130px',left:'-82px'});
 				$(ele).find('.energyData').stop().animate({height:0,marginBottom:0});
 			},
 			show() 
