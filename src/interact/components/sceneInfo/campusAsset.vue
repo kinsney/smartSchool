@@ -20,7 +20,7 @@
 	{
 		data() {return{
 			haha:{x:100,y:200},
-			position:{x:0,y:3000,z:0},
+			position:{"x":97,"y":3000,"z":-23915},
 			cameraPos:require('../../../render/controller/camera.js').position
 		}},
 		computed:

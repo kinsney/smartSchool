@@ -1,14 +1,14 @@
 const THREE = require('three')
 const camera = require('../controller/camera')
 const store = require('../../store.js')
-
+const $ = require('jquery')
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
 let hoverObjectName = store.hoverObjectName
-
-module.exports = (scene) => 
+let temp = null
+module.exports = (scene) =>
 {
-    if (!store.hoverEnabled) 
+    if (!store.hoverEnabled)
     {
         store.hoverObjectName = ''
         return
@@ -16,22 +16,26 @@ module.exports = (scene) =>
     raycaster.setFromCamera(mouse, camera)
     const nearest = raycaster.intersectObject(scene, true)[0]
     const targetHoverObjectName = nearest != null ? nearest.object.name : ''
-    if (hoverObjectName !== targetHoverObjectName) 
+    if (hoverObjectName !== targetHoverObjectName)
     {
         store.hoverObjectName = hoverObjectName = targetHoverObjectName
     }
 }
 
-document.addEventListener('mousemove', (event) => 
+document.addEventListener('mousemove', (event) =>
 {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
 });
-
-document.addEventListener('click',(e) => 
+document.addEventListener('mousedown',(e) =>
 {
-    if (store.hoverEnabled) 
+    temp = store.hoverObjectName
+});
+document.addEventListener('mouseup',(e) =>
+{
+    if (store.hoverEnabled&&temp==store.hoverObjectName)
     {
+
         store.currentObjectName = store.hoverObjectName
     }
 });
