@@ -3,7 +3,7 @@ const THREE = require('three')
 const buildingsJson = require('./render/buildings.json')
 window.store = module.exports = new Vue(
 {
-   data: 
+   data:
    {
       current: 'zone',
       hoverEnabled: true,
@@ -12,27 +12,28 @@ window.store = module.exports = new Vue(
       situation: 'garage',
       watcher: {},
       streetlights: {},
-      building: 
+      building:
       {
          name: '',
          currentFloor: null,
          floors: null,
+         floorHeight:null
       },
    },
-   computed: 
+   computed:
    {
-      devices() 
+      devices()
       {
          return this.building.currentFloor === null ? null : this.building.floors[this.building.currentFloor]
       }
    },
-   watch: 
+   watch:
    {
-      'currentObjectName' (name) 
+      'currentObjectName' (name)
       {
          //now position 0:null 1:building 2:building-1
          let position = name.split('-')
-         switch (position.length) 
+         switch (position.length)
          {
             case 0:
                this.current = 'zone'
@@ -41,11 +42,12 @@ window.store = module.exports = new Vue(
                this.current = 'table';
                let buildingName = this.building.name = position[0]
                let building = buildingsJson[buildingName]
-               if (building) 
+               if (building)
                {
                   let floors = building["floors"]
                   this.building.floors = floors
                   this.building.currentFloor = null
+                  this.building.floorHeight = building["floors_height"]
                }
                break;
             case 2:

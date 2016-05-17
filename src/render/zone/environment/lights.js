@@ -9,7 +9,7 @@ var target = new THREE.Object3D();
 target.position.set( 0, 0, 0 );
 
 //定义一个聚光灯-----用于对环境的提亮
-const spotLight = Object.assign(new THREE.SpotLight(0xFFFFFF,1), 
+const spotLight = Object.assign(new THREE.SpotLight(0xFFFFFF,1),
 {
 	distance:0,					//光强会从光源位置到distance距离线性衰减为0-------distance：0表示无限远
 	angle:Math.PI/3,
