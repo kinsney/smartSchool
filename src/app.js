@@ -1,5 +1,5 @@
 require('./render');
-// require('./interact');
+require('./interact');
 
 
 // var data = require('./data.js').building;

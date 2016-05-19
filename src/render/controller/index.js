@@ -21,7 +21,7 @@ Object.assign(controls, {
   enableKeys: false,
 
   minPolarAngle: Math.PI / 180 * 20,  //50
-  maxPolarAngle: Math.PI / 180 * 180,  //80
+  maxPolarAngle: Math.PI / 180 * 90,  //80
   autoRotate:false
 })
 
