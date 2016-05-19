@@ -28,13 +28,13 @@ spotLight.target = target;
 //定义一个方向光-----环境的投影主光源
 var nowHour = (new Date()).getHours();
 var sunPosX = 0;
-var sunPosY = 100000;
+var sunPosY = 40000;
 var sunIntensity = 0.3;
 var sunShadow = false;
 if (7<=nowHour&&nowHour<=17)
 {
-	sunPosX = Math.cos((nowHour-6)/12*Math.PI)*100000;
-	sunPosY = Math.sin((nowHour-6)/12*Math.PI)*100000;
+	sunPosX = Math.cos((nowHour-6)/12*Math.PI)*40000;
+	sunPosY = Math.sin((nowHour-6)/12*Math.PI)*40000;
 	sunIntensity = 1-(Math.abs(nowHour-12)/6*0.7);
 	sunShadow = true;
 }
@@ -52,7 +52,7 @@ downLight.target = target;
 //聚光和方向光共同用来模拟太阳照射
 const sun = new THREE.Object3D();
 sun.add(downLight);
-sun.position.set(sunPosX,sunPosY,20000);
+sun.position.set(sunPosX,sunPosY,2000);
 
 //定义一个半球光
 var hemiLight = new THREE.HemisphereLight( 0x1496FF, 0xE7E7E7, 0.2 );

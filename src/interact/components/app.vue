@@ -3,6 +3,7 @@
 </style>
 <template>
 	<top-bar></top-bar>
+	<login-box></login-box>
 	<scene-info></scene-info>
 	<map-box></map-box>
 	<bottom-bar></bottom-bar>
@@ -14,9 +15,10 @@
 		components:
 		{
 			topBar: require('./topBar.vue'),
+			loginBox: require('./login.vue'),
 			sceneInfo:require('./sceneInfo.vue'),
 			mapBox:require('./map.vue'),
-			bottomBar:require('./bottomBar.vue')
+			bottomBar:require('./bottomBar/bottomBar.vue')
 		}
 	}
 </script>

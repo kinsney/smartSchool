@@ -45,7 +45,7 @@
 			fEnv: require('./widget-infoSum/f-env.vue'),
 			fSec: require('./widget-infoSum/f-sec.vue'),
 			fEne: require('./widget-infoSum/f-ene.vue'),
-			fAss: require('./widget-infoSum/f-ass.vue')
+			fAss: require('./widget-infoSum/f-ass.vue'),
 		},
 		vuex:
 		{

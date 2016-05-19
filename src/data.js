@@ -18,21 +18,11 @@ var globalInfo   = { D:require('./dataModel/globalInfo.json') };
 
 /**
  * [根据后台传过来的值，动态修改model的值]
- * @param  {[String]} model [以上四个model变量名]
- * @param  {[Array]} val   [以对象的方式发送数据]
- *
- * val例举:
- *  [
- * 		{ key:'.building.building1', val:{···} },
- * 		{ key:'.building.building1.tag', val:'教四楼' }
- *  ]
+ * 
 **/
-function dynamicData(model,val)
+function dynamicData()
 {
-	val.forEach((val)=>
-	{
-		var str = model+val.key;
-	});
+	
 }
 
 exports.campus = scopeCampus;
