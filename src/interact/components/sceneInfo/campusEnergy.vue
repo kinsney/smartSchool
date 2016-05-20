@@ -2,14 +2,12 @@
 	* { font-family: 'PingFang SC','微软雅黑' ;}
 	.widgets
 	{
-		height:100%;
-		h1{font-size:28px; text-align:center;padding-top:20px;}
+		height:100%; background-color:#f5faf6;
 	}
 </style>
 
 <template>
 	<div class="widgets">
-		<h1 v-text="nowRoute"></h1>
 		<tag-energy></tag-energy>
 		<somg-sensor state="on" :pos="{x:400,y:300}"></somg-sensor>
 		<somg-sensor state="error" :pos="{x:600,y:300}"></somg-sensor>
@@ -29,13 +27,13 @@
 	{
 		components:
 		{
-			tagEnergy: require('./widget-tags/energy.vue'),
-			somgSensor: require('./widget-tags/smogSensor.vue'),
-			tagAircon: require('./widget-tags/aircon.vue'),
-			roomLamp: require('./widget-tags/roomLamp.vue'),
-			tagDoor: require('./widget-tags/door.vue'),
-			breaker: require('./widget-tags/breaker.vue'),
-			equipment: require('./widget-tags/equipment.vue')
+			tagEnergy: require('./tags/energy.vue'),
+			somgSensor: require('./tags/smogSensor.vue'),
+			tagAircon: require('./tags/aircon.vue'),
+			roomLamp: require('./tags/roomLamp.vue'),
+			tagDoor: require('./tags/door.vue'),
+			breaker: require('./tags/breaker.vue'),
+			equipment: require('./tags/equipment.vue')
 		},
 		vuex:
 		{

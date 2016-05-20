@@ -31,16 +31,16 @@ $itemW : 200px;
 </style>
 
 <template>
-  <div class="v-bottomBar" @mousedown.stop="">
-	<ul class="menuBar">
-		<template v-for="item in items">
+	<div class="v-bottomBar" @mousedown.stop="">
+		<ul class="menuBar">
+			<template v-for="item in items">
+				<li class="separate"><img src="./img/seprate.png" /></li>
+				<menu-li :data="item" :index="$index"></menu-li>
+			</template>
 			<li class="separate"><img src="./img/seprate.png" /></li>
-			<menu-li :data="item" :index="$index"></menu-li>
-		</template>
-		<li class="separate"><img src="./img/seprate.png" /></li>
-	</ul>
-	<div class="Bar"><img src="./img/bar.png" /></div>
-  </div>
+		</ul>
+		<div class="Bar"><img src="./img/bar.png" /></div>
+	</div>
 </template>
 
 <script>

@@ -2,14 +2,12 @@
 	* { font-family: 'PingFang SC','微软雅黑' ;}
 	.widgets
 	{
-		height:100%;
-		h1{font-size:28px; text-align:center;padding-top:20px;}
+		height:100%; background-color:#f5faf6;
 	}
 </style>
 
 <template>
 	<div class="widgets">
-		<h1 v-text="nowRoute"></h1>
 		<tag-lamp state="on" :pos="{x:100,y:200}"></tag-lamp>
 		<tag-lamp state="off" :pos="{x:400,y:200}"></tag-lamp>
 		<tag-lamp state="error" :pos="{x:700,y:200}"></tag-lamp>
@@ -26,8 +24,8 @@
 	{
 		components:
 		{
-			tagLamp: require('./widget-tags/lamp.vue'),
-			tagCamera: require('./widget-tags/camera.vue')
+			tagLamp: require('./tags/lamp.vue'),
+			tagCamera: require('./tags/camera.vue')
 		},
 		vuex:
 		{

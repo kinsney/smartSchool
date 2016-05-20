@@ -165,9 +165,9 @@ $marginSide : 30px;
 			<img class="logo" src="./img/topBar/logo.png" />
 		</div>
 		<ul class="switch" v-el:switch>
-			<li class="now">campus</li>
-			<li>building</li>
-			<li>floor</li>
+			<li :class="{now:scope=='campus'}">campus</li>
+			<li :class="{now:scope=='building'}">building</li>
+			<li :class="{now:scope=='floor'}">floor</li>
 		</ul>
 	</div>
 </template>

@@ -7,16 +7,20 @@
 </style>
 
 <template>
-	<div class="widgets">
+	<div class="widgets" v-el:obj>
 	</div>
 </template>
 
 <script>
+	const getPos = require('../../getPos.js');
 	module.exports =
 	{
-		components:
+		data() {return{
+		}},
+		computed:
 		{
 		},
+		components: {},
 		vuex:
 		{
 			getters:
