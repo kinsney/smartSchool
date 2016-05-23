@@ -7,7 +7,7 @@ const state =
 {
 	isLogin:false,  //登录状态应该通过会话控制进行获取和设置，以保证会话的安全性
 	loginBox:false, //全局的登录框是否显示
-	routeSite:{scope:"campus",menu:"Asset"},   //scope取campus,building,floor三个层面,menu取Environment,Security,Energy,Asset
+	routeSite:{scope:"campus",menu:"Energy"},   //scope取campus,building,floor三个层面,menu取Environment,Security,Energy,Asset
 	selectors:
 	{
 		campus:
