@@ -4,6 +4,7 @@
 
 <template>
 	<info-sum></info-sum>
+	<tags></tags>
 	<component :is="currentView"></component>
 </template>
 
@@ -15,6 +16,8 @@
 		components:
 		{
 			infoSum:require('./sceneInfo/infoSum/index.vue'),
+			tags:require('./sceneInfo/tags/index.vue'),
+
 			campusEnvironment:require('./sceneInfo/campusEnvironment.vue'),
 			campusSecurity:require('./sceneInfo/campusSecurity.vue'),
 			campusEnergy:require('./sceneInfo/campusEnergy.vue'),

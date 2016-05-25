@@ -8,7 +8,6 @@
 
 <template>
 	<div class="widgets">
-		<tag-energy></tag-energy>
 		<somg-sensor state="on" :pos="{x:400,y:300}"></somg-sensor>
 		<somg-sensor state="on" :danger="true" :pos="{x:600,y:300}"></somg-sensor>
 		<somg-sensor state="error" :pos="{x:800,y:300}"></somg-sensor>
@@ -29,10 +28,9 @@
 	{
 		components:
 		{
-			tagEnergy: require('./tags/energy.vue'),
 			somgSensor: require('./tags/smogSensor.vue'),
 			tagAircon: require('./tags/aircon.vue'),
-			roomLamp: require('./tags/roomLamp.vue'),
+			roomLamp: require('./tags/roomLight.vue'),
 			tagDoor: require('./tags/door.vue'),
 			breaker: require('./tags/breaker.vue'),
 			equipment: require('./tags/equipment.vue')

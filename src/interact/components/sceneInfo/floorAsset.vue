@@ -12,7 +12,6 @@
 </template>
 
 <script>
-	const getPos = require('../../getPos.js');
 	module.exports =
 	{
 		data() {return{

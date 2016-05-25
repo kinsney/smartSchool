@@ -1,4 +1,4 @@
-const camera = require('../render/controller/camera.js');
+const camera = require('../../../../render/controller/camera.js');
 const THREE = window.THREE = require('three');
 
 function getPos({x,y,z})

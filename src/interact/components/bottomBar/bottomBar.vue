@@ -33,9 +33,9 @@ $itemW : 200px;
 <template>
 	<div class="v-bottomBar" @mousedown.stop="">
 		<ul class="menuBar">
-			<template v-for="item in items">
+			<template v-for="(key,val) in choices">
 				<li class="separate"><img src="./img/seprate.png" /></li>
-				<menu-li :data="item" :index="$index"></menu-li>
+				<menu-li :menu="key" :choice="val" :icon="icons[key]" :names="names[key]"></menu-li>
 			</template>
 			<li class="separate"><img src="./img/seprate.png" /></li>
 		</ul>
@@ -47,18 +47,26 @@ $itemW : 200px;
 	module.exports =
 	{
 		data() {return{
-			items:
-			[
-				{en:"ENVIRONMENT", cn:"环境", route:"Environment"},
-				{en:"SECURITY",    cn:"安防", route:"Security"},
-				{en:"ENERGY",      cn:"能源", route:"Energy"},
-				{en:"ASSETS",      cn:"资产", route:"Asset"}
-			]
+			icons:{Environment:'env.png', Security:'sec.png', Energy:'ene.png', Asset:'ass.png'},
+			names:
+			{
+				Environment:{en:"ENVIRONMENT", cn:"环境"}, 
+				Security:{en:"SECURITY", cn:"安防",}, 
+				Energy:{en:"ENERGY", cn:"能源"}, 
+				Asset:{en:"ASSETS", cn:"资产"}
+			}
 		}},
 		components:
 		{
 			menuLi:require('./menuItem.vue')
 		},
-		methods: {}
+		methods: {},
+		vuex:
+		{
+			getters:
+			{
+				choices:({routeSite,selectors})=>selectors[routeSite.scope]
+			}
+		}
 	}
 </script>

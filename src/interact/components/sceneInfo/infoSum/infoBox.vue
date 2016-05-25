@@ -24,10 +24,12 @@ $colorBorder : #278d4c;
 	}
 }
 
+.switch-transition {transition:ease 0.5s;opacity: 1; top:70px;}
+.switch-enter, .switch-leave { opacity: 0; top:20px;}
 
 </style>
 <template>
-	<div class="v-infoBox" :style="{width:w+'px',marginLeft:(-w/2)+'px'}" @mousedown.stop="">
+	<div class="v-infoBox" :style="{width:w+'px',marginLeft:(-w/2)+'px'}" @mousedown.stop="" transition="switch" transition-mode="out-in">
 		<span class="conor conor1"><img src="./img/conor1.png" /></span>
 		<span class="conor conor2"><img src="./img/conor2.png" /></span>
 		<span class="conor conor3"><img src="./img/conor3.png" /></span>

@@ -1,8 +1,5 @@
 <style lang="sass" scoped>
 
-.fade-transition {transition:ease 0.3s;opacity: 1;}
-.fade-enter, .fade-leave { opacity: 0;}
-
 </style>
 
 <template>
