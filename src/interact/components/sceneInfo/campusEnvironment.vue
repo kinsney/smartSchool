@@ -17,7 +17,7 @@
 	{
 		components:
 		{
-			panel:require('./panels/warning.vue')
+			panel:require('./panels/asset.vue')
 		},
 		vuex:
 		{

@@ -9,7 +9,7 @@ $itemW : 200px;
 .v-bottomBar
 {
 	position:absolute; left:0; bottom:0;
-	z-index: 1000;
+	z-index: 10000;
 	height: $barH; width:100%;
 	padding-bottom: $padBottom;
 	background-color: $greenB;
