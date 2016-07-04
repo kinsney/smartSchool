@@ -7,8 +7,12 @@
                 "cabinet":{}
             },
             {
-                "sofa":{},
-                "chair":{}
+                "sofa":
+                {
+                    },
+                "chair":{
+
+                }
             },
             {
 

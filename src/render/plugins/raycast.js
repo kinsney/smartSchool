@@ -1,11 +1,11 @@
 const THREE = require('three')
 const camera = require('../controller/camera')
 const store = require('../../store.js')
-const $ = require('jquery')
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
 let hoverObjectName = store.hoverObjectName
 let temp = null
+
 module.exports = (scene) =>
 {
     if (!store.hoverEnabled)
@@ -33,10 +33,10 @@ document.addEventListener('mousedown',(e) =>
 });
 document.addEventListener('mouseup',(e) =>
 {
+
     if (store.hoverEnabled&&temp==store.hoverObjectName)
     {
-
-        store.currentObjectName = store.hoverObjectName
+        if(store.hoverObjectName)store.currentObjectName = store.hoverObjectName
     }
 });
 

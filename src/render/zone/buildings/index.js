@@ -24,7 +24,6 @@ store.$watch('hoverObjectName',(newObject,oldObject) =>
 {
     const newBuilding = window.scene.getObjectByName(newObject)
     const oldBuilding = window.scene.getObjectByName(oldObject)
-
     utils.hover(newBuilding,true)
     utils.hover(oldBuilding,false)
 })

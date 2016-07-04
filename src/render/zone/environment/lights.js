@@ -32,8 +32,8 @@ var sunIntensity = 0.3;
 var sunShadow = false;
 if (7<=nowHour&&nowHour<=17)
 {
-	sunPosX = Math.cos((nowHour-6)/12*Math.PI)*2000;
-	sunPosY = Math.sin((nowHour-6)/12*Math.PI)*2000;
+	sunPosX = Math.cos((nowHour-6)/12*Math.PI)*40000;
+	sunPosY = Math.sin((nowHour-6)/12*Math.PI)*40000;
 	sunIntensity = 1-(Math.abs(nowHour-12)/6*0.7);
 	sunShadow = true;
 }

@@ -1,33 +1,66 @@
 const THREE = require('three')
-
+const TWEEN = require('tween')
 const build = require('./device').build
 const store = require('../../../store')
+const actStore = require('../../../actStore')
 const floors = require('../floors')
 const utils = require('../../plugins/utils.js')
-const devices = module.exports = new THREE.Object3D
-
+const devices = window.devices = module.exports = new THREE.Object3D
 devices.name = 'devices'
 devices.rotation.y = Math.PI * 45 / 180
-store.$watch('devices',(value) =>
+actStore.watch('routeSite.scope',(newValue,oldValue) =>
 {
-    if(value)
+    if(newValue=='floor'&&oldValue=="building")
     {
-        for (let mesh = floors.children[0]; mesh != null; mesh = floors.children[0]) 
+        let floorsLength = store.building.floors.length
+        let currentFloor = store.building.currentFloor
+
+        new TWEEN.Tween(floors.children[currentFloor].position).to({
+            x:0,y:0,z:0
+        },2000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
+        }).start()
+
+        for (let a=currentFloor+1;a<floorsLength;a++)
         {
-            utils.dispose(mesh)
-            floors.remove(mesh)
+            var floor = floors.children[a]
+            new TWEEN.Tween(floor.position).to({
+                x:0,y:floor.position.y+8000,z:0
+            },2000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
+                for (let mesh = floors.children[0]; mesh != null; mesh = floors.children[0])
+                {
+                    {
+                        utils.dispose(mesh)
+                        floors.remove(mesh)
+                    }
+                }
+            }).start()
         }
-        for (let mesh = devices.children[0]; mesh != null; mesh = devices.children[0]) 
+        for (let a=currentFloor-1;a>=0;a--)
         {
-            utils.dispose(mesh)
-            devices.remove(mesh)
+            var floor = floors.children[a]
+            new TWEEN.Tween(floor.position).to({
+                x:0,y:floor.position.y-8000,z:0
+            },2000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
+            for (let mesh = floors.children[0]; mesh != null; mesh = floors.children[0])
+            {
+                {
+                    utils.dispose(mesh)
+                    floors.remove(mesh)
+                }
+            }
+            Object.keys(store.devices).sort().forEach((value)=>
+            {
+                let device = build(value)
+                devices.add(device)
+                devices.position.set(0,0,0)
+            })
+            }).start()
         }
-        Object.keys(value).sort().forEach((value)=>
-        {
-            let device = build(value)
-            devices.add(device)
-            devices.position.set(0,0,0)
-        })
+        // for (let mesh = devices.children[0]; mesh != null; mesh = devices.children[0])
+        // {
+        //     utils.dispose(mesh)
+        //     devices.remove(mesh)
+        // }
     }
 },{deep:true})
 

@@ -33,10 +33,7 @@ function makeSkyBox(folderName,situation)
         });
         var skybox = new THREE.Mesh(new THREE.BoxGeometry(300000, 300000, 300000), material);
         situation.add(skybox);
-    },function()
-    {
-        console.log('天空盒图片加载失败');
-    });
+    },function() {console.log('天空盒图片加载失败'); });
 }
 
 module.exports = makeSkyBox;

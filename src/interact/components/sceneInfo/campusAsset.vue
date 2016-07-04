@@ -3,13 +3,11 @@
 	.widgets
 	{
 		height:100%;
-		h1{font-size:28px; text-align:center;padding-top:20px;}
 	}
 </style>
 
 <template>
 	<div class="widgets" v-el:obj>
-		<h1 v-text="nowRoute"></h1>
 		<tag state="off" :pos="{x:pos.x,y:pos.y}"></tag>
 	</div>
 </template>
@@ -20,7 +18,7 @@
 	{
 		data() {return{
 			haha:{x:100,y:200},
-			position:{"x":97,"y":3000,"z":-23915},
+			position:{x:97,y:3000,z:-23915},
 			cameraPos:require('../../../render/controller/camera.js').position
 		}},
 		computed:
@@ -31,7 +29,7 @@
 				return getPos(this.position);
 			}
 		},
-		components: {tag: require('./widget-tags/energy.vue')},
+		components: {tag: require('./tags/energy.vue')},
 		vuex:
 		{
 			getters:

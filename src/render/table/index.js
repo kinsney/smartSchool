@@ -6,7 +6,11 @@ const floors = require('./floors');
 const myAxes = require('../plugins/arrow.js')();
 
 
-const scene = module.exports  = new THREE.Scene();
-scene.add(floors, environment,devices,myAxes);
+const scene = exports.scene  = new THREE.Scene();
+const area = exports.area = new THREE.Object3D();
+area.add(floors,devices);
+area.name  = "table_area"
+scene.add(environment,area,myAxes);
 scene.name = "table";
+
 

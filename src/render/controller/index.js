@@ -12,7 +12,7 @@ Object.assign(controls, {
   enableDamping: true,
   dampingFactor: 0.2,
 
-  maxDistance:300000,
+  maxDistance:30000,
 
   rotateSpeed: 0.2,
   autoRotateSpeed: -0.3,
