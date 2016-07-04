@@ -7,7 +7,7 @@ const state =
 {
 	isLogin:false,  //登录状态应该通过会话控制进行获取和设置，以保证会话的安全性
 	loginBox:false, //全局的登录框是否显示
-	routeSite:{scope:"campus",menu:"Asset"},   //scope取campus,building,floor三个层面,menu取Environment,Security,Energy,Asset
+	routeSite:{scope:"campus",menu:"Environment"},   //scope取campus,building,floor三个层面,menu取Environment,Security,Energy,Asset
 	selectors:
 	{
 		campus:
@@ -15,22 +15,22 @@ const state =
 			Environment:
 			{ 
 				hardware:{streetLight:true},
-				panel:{} 
+				panel:{weather:true,streetLight:true} 
 			},
 			Security:
 			{ 
 				hardware:{camera:true},
-				panel:{} 
+				panel:{camera:true,warning:true} 
 			},
 			Energy:
 			{ 
 				hardware:{energy:true},
-				panel:{} 
+				panel:{energy:true} 
 			},
 			Asset:
 			{ 
 				hardware:{breaker:true,camera:true,streetLight:true},
-				panel:{} 
+				panel:{asset:true} 
 			}
 		},
 		building:
@@ -38,22 +38,22 @@ const state =
 			Environment:
 			{ 
 				hardware:{},
-				panel:{} 
+				panel:{weather:true} 
 			},
 			Security:
 			{ 
 				hardware:{camera:true},
-				panel:{} 
+				panel:{camera:true,warning:true} 
 			},
 			Energy:
 			{ 
 				hardware:{},
-				panel:{} 
+				panel:{energy:true} 
 			},
 			Asset:
 			{ 
 				hardware:{camera:true},
-				panel:{} 
+				panel:{asset:true} 
 			}
 		},
 		floor:
@@ -61,22 +61,22 @@ const state =
 			Environment:
 			{ 
 				hardware:{aircon:true,roomLight:true},
-				panel:{} 
+				panel:{weather:true} 
 			},
 			Security:
 			{ 
 				hardware:{camera:true,smogSensor:true,door:true},
-				panel:{} 
+				panel:{camera:true,warning:true} 
 			},
 			Energy:
 			{ 
 				hardware:{energy:true},
-				panel:{} 
+				panel:{energy:true} 
 			},
 			Asset:
 			{ 
 				hardware:{aircon:true,roomLight:true,camera:true,smogSensor:true,door:true,equipment:true,breaker:true},
-				panel:{} 
+				panel:{asset:true} 
 			}
 		}
 	}

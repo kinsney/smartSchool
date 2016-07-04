@@ -8,6 +8,7 @@
 
 <template>
 	<div class="widgets">
+		<panel></panel>
 	</div>
 </template>
 
@@ -16,6 +17,7 @@
 	{
 		components:
 		{
+			panel:require('./panels/warning.vue')
 		},
 		vuex:
 		{

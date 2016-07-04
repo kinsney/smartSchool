@@ -88,8 +88,8 @@ $greenC : #6cf09c;
 			</ul>
 			<div class="h-dotline" v-show="numTag&&numPanel"><span class="dot-l"></span><span class="dot-r"></span></div>
 			<ul class="panels">
-				<li>
-					<label><input type="checkbox"><h3>天气系统</h3></label>
+				<li v-for="(key,val) in choice.panel">
+					<label><input v-model="val" type="checkbox"><h3 v-text="panelName[key]"></h3></label>
 				</li>
 			</ul>
 		</div>
@@ -105,7 +105,11 @@ $greenC : #6cf09c;
 				aircon:'空调', breaker:'断路器', camera:'摄像头', door:'门', energy:'能源',
 				equipment:'教学设备', streetLight:'路灯', roomLight:'室内灯', smogSensor:'烟雾传感'
 			},
-			panelName:{},
+			panelName:
+			{
+				weather:'天气详情',streetLight:'路灯系统',camera:'监控系统',
+				warning:'警报系统',energy:'能源系统',asset:'资产系统'
+			},
 			slideH:0
 		}},
 		props:
@@ -116,10 +120,10 @@ $greenC : #6cf09c;
 		computed:
 		{
 			numTag(){ return Object.keys(this.choice.hardware).length; },
-			numPanel(){ return Object.keys(this.choice.panel).length + 1; },
+			numPanel(){ return Object.keys(this.choice.panel).length; },
 			totalH()
 			{
-				return Math.ceil(this.numTag/2)*26 + 32*this.numPanel +32;
+				return Math.ceil(this.numTag/2)*26 + 52*this.numPanel + 10;
 			}
 		},
 		methods: {},
