@@ -106,14 +106,14 @@ $colorBg : rgba(0,0,0,0.75);
 	module.exports =
 	{
 		data() {return{
-			danger:false,
 			smog:"1691 正常",
 			locate:"教四楼"
 		}},
 		props:
 		{
 			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on error
+			state: { type:String, default:"on" }, // on error
+			danger: { type:Boolean, default:false }
 		},
 		methods:
 		{

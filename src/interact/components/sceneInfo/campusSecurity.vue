@@ -24,7 +24,7 @@
 	{
 		components:
 		{
-			tagLamp: require('./tags/lamp.vue'),
+			tagLamp: require('./tags/streetLight.vue'),
 			tagCamera: require('./tags/camera.vue')
 		},
 		vuex:

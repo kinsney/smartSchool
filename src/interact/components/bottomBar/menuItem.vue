@@ -65,20 +65,20 @@ $itemW : 200px;
 </style>
 
 <template>
-	<li class="v-itemLi" @click="changeMenu(index)">
-		<div class="menuBox" :class="{'nowItem':data.route==menu}">
+	<li class="v-itemLi" @click="changeMenu">
+		<div class="menuBox" :class="{'nowItem':menu==nowMenu}">
 			<div class="menuItem">
-				<h3 v-text="data.en"></h3>
+				<h3 v-text="names.en"></h3>
 				<div>
-					<img :src='"./img/bottomBar/"+imgs[index]' />&nbsp;&nbsp;
-					<span v-text="data.cn"></span>
+					<img :src='"./img/bottomBar/"+icon' />&nbsp;&nbsp;
+					<span v-text="names.cn"></span>
 				</div>
 			</div>
 			<div class="chose left"><img src="./img/left.png" /></div>
 			<div class="chose right"><img src="./img/right.png" /></div>
 			<div class="chose down"><img src="./img/down.png" /></div>
 		</div>
-		<selector :isnow="data.route==menu"></selector>
+		<selector :choice="choice" :isnow="menu==nowMenu"></selector>
 	</li>
 </template>
 
@@ -86,12 +86,14 @@ $itemW : 200px;
 	module.exports =
 	{
 		data() {return{
-			imgs:['env.png','sec.png','ene.png','ass.png']
+			
 		}},
 		props:
 		{
-			data: {type:Object, default:()=>{}},
-			index: {type:Number, default:0}
+			choice: {type:Object, default:()=>{}},
+			menu:{type:String, default:""},
+			icon:{type:String, default:""},
+			names: {type:Object, default:()=>{}}
 		},
 		components:
 		{
@@ -99,20 +101,16 @@ $itemW : 200px;
 		},
 		methods:
 		{
-			changeMenu(index)
+			changeMenu()
 			{
-				var items = this.$parent.items;
-				items.forEach((item)=>item.select = false);
-				items[index].select = true;
-				this.$store.dispatch('SetRoutSite',{menu:items[index].route});
+				this.$store.dispatch('SetRoutSite',{menu:this.menu});
 			}
 		},
 		vuex:
 		{
 			getters:
 			{
-				scope:({routeSite})=>routeSite.scope,
-				menu:({routeSite})=>routeSite.menu
+				nowMenu:({routeSite})=>routeSite.menu
 			}
 		}
 	}

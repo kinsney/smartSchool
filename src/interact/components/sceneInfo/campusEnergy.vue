@@ -8,17 +8,18 @@
 
 <template>
 	<div class="widgets">
-		<tag-energy></tag-energy>
 		<somg-sensor state="on" :pos="{x:400,y:300}"></somg-sensor>
-		<somg-sensor state="error" :pos="{x:600,y:300}"></somg-sensor>
-		<tag-aircon state="off" :pos="{x:800,y:300}"></tag-aircon>
-		<room-lamp state="error" :pos="{x:1000,y:300}"></room-lamp>
-		<tag-door state="on" :pos="{x:1200,y:340}"></tag-door>
-		<tag-door state="off" :pos="{x:1200,y:235}"></tag-door>
-		<breaker state="on" :pos="{x:200,y:500}"></breaker>
-		<breaker state="error" :pos="{x:400,y:500}"></breaker>
-		<equipment :state="{c:'on',p:'error'}" :pos="{x:600,y:500}"></equipment>
-		<equipment :state="{c:'off',p:'off'}" :pos="{x:800,y:500}"></equipment>
+		<somg-sensor state="on" :danger="true" :pos="{x:600,y:300}"></somg-sensor>
+		<somg-sensor state="error" :pos="{x:800,y:300}"></somg-sensor>
+		<tag-aircon state="off" :pos="{x:200,y:550}"></tag-aircon>
+		<room-lamp state="error" :pos="{x:400,y:550}"></room-lamp>
+		<room-lamp state="on" :pos="{x:600,y:550}"></room-lamp>
+		<tag-door state="on" :pos="{x:800,y:550}"></tag-door>
+		<tag-door state="off" :pos="{x:800,y:445}"></tag-door>
+		<breaker state="on" :pos="{x:200,y:800}"></breaker>
+		<breaker state="error" :pos="{x:400,y:800}"></breaker>
+		<equipment :state="{c:'on',p:'error'}" :pos="{x:600,y:800}"></equipment>
+		<equipment :state="{c:'off',p:'off'}" :pos="{x:800,y:800}"></equipment>
 	</div>
 </template>
 
@@ -27,10 +28,9 @@
 	{
 		components:
 		{
-			tagEnergy: require('./tags/energy.vue'),
 			somgSensor: require('./tags/smogSensor.vue'),
 			tagAircon: require('./tags/aircon.vue'),
-			roomLamp: require('./tags/roomLamp.vue'),
+			roomLamp: require('./tags/roomLight.vue'),
 			tagDoor: require('./tags/door.vue'),
 			breaker: require('./tags/breaker.vue'),
 			equipment: require('./tags/equipment.vue')

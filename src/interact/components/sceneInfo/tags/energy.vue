@@ -98,16 +98,26 @@ $colorBg : rgba(0,0,0,0.75);
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
 	module.exports =
 	{
 		data() {return{
 			energy:"8476J",
 			open:false,
-			locate:"教四楼"
+			locate:"教四楼",
+			cameraPos:require('../../../../render/controller/camera.js').position
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}}
+			tagpos: {type: Object, default:()=>{return { x:0,y:5000,z:0 };}}
+		},
+		computed:
+		{
+			pos()
+			{
+				var ranbingluan = this.cameraPos.x;
+				return getPos(this.tagpos);
+			}
 		},
 		methods:
 		{

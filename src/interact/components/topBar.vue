@@ -17,9 +17,10 @@ $marginSide : 30px;
 	// position: absolute; left:0; top:0;
 	height:$barH + $padTop; width:100%;
 	font-weight:lighter;
-	z-index:1000;
+	position:relative;
+	z-index:5000;
 	background-color: $greenD;
-	box-shadow: 0 0 100px rgb(0,0,0);
+	box-shadow: 0 0 75px rgba(0,0,0,0.5);
 	
 	.leftPart
 	{
