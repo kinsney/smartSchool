@@ -48,14 +48,15 @@ actStore.watch('routeSite.scope',(newValue,oldValue) =>
                     floors.remove(mesh)
                 }
             }
-            Object.keys(store.devices).sort().forEach((value)=>
-            {
-                let device = build(value)
-                devices.add(device)
-                devices.position.set(0,0,0)
-            })
             }).start()
         }
+        setTimeout(Object.keys(store.devices).sort().forEach((value)=>
+                    {
+                        let deviceObject = store.devices[value]
+                        let device = build(value,deviceObject.x,deviceObject.y,deviceObject.z)
+                        devices.add(device)
+                        devices.position.set(0,0,0)
+                    }),2000)
         // for (let mesh = devices.children[0]; mesh != null; mesh = devices.children[0])
         // {
         //     utils.dispose(mesh)
