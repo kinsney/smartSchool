@@ -8,7 +8,6 @@
 
 <template>
 	<div class="widgets">
-		<panel></panel>
 	</div>
 </template>
 
