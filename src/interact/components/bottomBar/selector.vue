@@ -88,7 +88,7 @@ $greenC : #6cf09c;
 			</ul>
 			<div class="h-dotline" v-show="numTag&&numPanel"><span class="dot-l"></span><span class="dot-r"></span></div>
 			<ul class="panels">
-				<li v-for="(key,val) in choice.panel">
+				<li v-for="(key,val) in choice.panel" @click="onlyPanel(key)">
 					<label><input v-model="val" type="checkbox"><h3 v-text="panelName[key]"></h3></label>
 				</li>
 			</ul>
@@ -121,12 +121,16 @@ $greenC : #6cf09c;
 		{
 			numTag(){ return Object.keys(this.choice.hardware).length; },
 			numPanel(){ return Object.keys(this.choice.panel).length; },
-			totalH()
+			totalH() { return Math.ceil(this.numTag/2)*26 + 52*this.numPanel + 10; }
+		},
+		methods: 
+		{
+			onlyPanel(key)
 			{
-				return Math.ceil(this.numTag/2)*26 + 52*this.numPanel + 10;
+				var panels = this.choice.panel;
+				Object.keys(panels).forEach((name)=>{if(name!=key) panels[name]=false;});
 			}
 		},
-		methods: {},
 		vuex: { getters: {} }
 	}
 </script>

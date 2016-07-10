@@ -75,14 +75,14 @@ $colorLine:#6cf09c;
 </style>
 
 <template>
-	<backboard name="监控管理系统" :size="{w:960,h:620}">
+	<backboard name="监控管理系统" :size="{w:960,h:620}" :toshow="toshow">
 		<div class="cameractl">
 			<div class="left">
 				<div class="viewArea">
 					<h3> 监控区域</h3>
 					<div class="wrapper" v-el:wrap>
 						<ul>
-							<li v-for="area in areas" :class="{nowItem:$index==nowItem}" @click="nowItem=$index">
+							<li v-for="area in areas" track-by="$index" :class="{nowItem:$index==nowItem}" @click="nowItem=$index">
 								<h4 v-text="area"></h4>
 								<ul>
 									<li v-for="floor in floors"><span v-text="floor"></span></li>
@@ -117,21 +117,9 @@ $colorLine:#6cf09c;
 			floors:['第一层','第二层','第三层','第四层','第五层'],
 			date:{year:2016,month:3,day:19},
 			dateCn:{year:'年',month:'月',day:'日'},
-			nowItem:0
-		}},
-		props:
-		{
-			
-		},
-		components:
-		{
-			line:require('./line.vue'),
-			backboard:require('./backBoard.vue')
-		},
-		ready()
-		{
-			var element = this.$els.wrap;
-			var options = 
+			nowItem:0,
+			scroller:false,
+			options:
 			{
 				mouseWheel:true,
 				scrollbars:true,
@@ -139,9 +127,27 @@ $colorLine:#6cf09c;
 				snap:true,
 				fadeScrollbars:true
 			}
-			var myScroll = new iScroll(element,options);
-			console.dir(myScroll.options);
-
+		}},
+		props:
+		{
+			toshow:{type:Boolean, default:false}
+		},
+		components:
+		{
+			line:require('./line.vue'),
+			backboard:require('./backBoard.vue')
+		},
+		ready() { },
+		watch:
+		{
+			"toshow":function(isShow)
+			{
+				if(isShow&&(!this.scroller))
+				{
+					var _this = this;
+					setTimeout(()=>{_this.scroller = new iScroll(_this.$els.wrap,_this.options);},600);
+				}
+			}
 		}
 	}
 </script>

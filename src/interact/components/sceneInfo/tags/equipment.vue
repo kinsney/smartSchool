@@ -95,7 +95,7 @@ $colorBt : #2fae5d;
 </style>
 
 <template>
-	<div class="tag-equipment" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="tag-equipment" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="sumState" v-el:info>
 			<div class="u">
 				<span>教学设备</span>
@@ -127,6 +127,8 @@ $colorBt : #2fae5d;
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
+
 	module.exports =
 	{
 		data() {return{
@@ -143,8 +145,18 @@ $colorBt : #2fae5d;
 		},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:Object, default:{c:'on',p:'on'} } // on off error
+			tagPos: {type: Object, default:()=>{return { x:200,y:300 };}},
+			state: { type:Object, default:{c:'on',p:'on'} }, // on off error
+			objName: { type:String, default:"Equipment" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
+		},
+		computed:
+		{
+			pos()
+			{
+				return {x:this.tagPos.x,y:this.tagPos.y};
+			}
 		},
 		methods: {},
 		ready()

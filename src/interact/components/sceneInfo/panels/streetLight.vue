@@ -46,7 +46,7 @@ $colorLine:#6cf09c;
 </style>
 
 <template>
-	<backboard name="路灯控制系统" :size="{w:600,h:620}">
+	<backboard name="路灯控制系统" :size="{w:600,h:620}" :toshow="toshow">
 		<div class="wrapper" v-el:wrap>
 			<div>
 				<div class="ctl">
@@ -121,21 +121,9 @@ $colorLine:#6cf09c;
 				{whichLight:'5号路灯',locate:'主干道',plan:'每天晚上 9：30'},
 				{whichLight:'5号路灯',locate:'主干道',plan:'每天晚上 9：30'},
 				{whichLight:'5号路灯',locate:'主干道',plan:'每天晚上 9：30'},
-			]
-		}},
-		props:
-		{
-			
-		},
-		components:
-		{
-			line:require('./line.vue'),
-			backboard:require('./backBoard.vue')
-		},
-		ready()
-		{
-			var element = this.$els.wrap;
-			var options = 
+			],
+			scroller:false,
+			options:
 			{
 				mouseWheel:true,
 				scrollbars:true,
@@ -143,9 +131,27 @@ $colorLine:#6cf09c;
 				snap:true,
 				fadeScrollbars:true
 			}
-			var myScroll = new iScroll(element,options);
-			console.dir(myScroll.options);
-
+		}},
+		props:
+		{
+			toshow:{type:Boolean, default:false}
+		},
+		components:
+		{
+			line:require('./line.vue'),
+			backboard:require('./backBoard.vue')
+		},
+		ready() { },
+		watch:
+		{
+			"toshow":function(isShow)
+			{
+				if(isShow)
+				{
+					var _this = this;
+					setTimeout(()=>{_this.scroller = new iScroll(_this.$els.wrap,_this.options);},600);
+				}
+			}
 		}
 	}
 </script>

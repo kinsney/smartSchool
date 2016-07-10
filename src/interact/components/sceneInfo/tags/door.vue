@@ -75,7 +75,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-door" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="tag-door" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" v-el:info>
 			<div class="u">
 				<span v-show="state=='off'">点击模型开门</span>
@@ -94,6 +94,8 @@ $colorBg : rgba(0,0,0,0.75);
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
+
 	module.exports =
 	{
 		data() {return{
@@ -101,8 +103,18 @@ $colorBg : rgba(0,0,0,0.75);
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on off
+			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			state: { type:String, default:"on" }, // on off
+			objName: { type:String, default:"Door" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
+		},
+		computed:
+		{
+			pos()
+			{
+				return {x:this.tagPos.x,y:this.tagPos.y};
+			}
 		},
 		methods: {}
 	}

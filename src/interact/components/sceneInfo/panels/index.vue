@@ -1,14 +1,25 @@
 <style lang="sass" scoped>
-
+	* { font-family: 'PingFang SC','微软雅黑' ;}
+	
+	.v-panel 
+	{ 
+	}
 </style>
 
 <template>
-	<component></component>
+	<div class="v-panel">
+		<template v-for="(key,val) in panels">
+			<component :is="key" :toshow="val"></component>
+		</template>
+	</div>
 </template>
 
 <script>
 	module.exports =
 	{
+		data() {return{
+
+		}},
 		components:
 		{
 			asset: require('./asset.vue'),
@@ -24,8 +35,9 @@
 			{
 				scope: ({routeSite}) => {return routeSite.scope;},
 				menu: ({routeSite}) => {return routeSite.menu;},
-				panels:({routeSite,selectors}) => selectors[routeSite.scope][routeSite.menu].panel;
+				panels:({routeSite,selectors}) => selectors[routeSite.scope][routeSite.menu].panel
 			}
-		}
+		},
+		computed: {}
 	}
 </script>

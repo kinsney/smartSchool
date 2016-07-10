@@ -46,7 +46,7 @@ $colorBt : rgba(255,255,255,0.1);
 </style>
 
 <template>
-	<info-box :w="540">
+	<info-box :w="550">
 		<div class="cont">
 			<div class="v1">
 				<img src="./img/weather.png" />

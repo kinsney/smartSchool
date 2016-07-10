@@ -65,7 +65,7 @@ $grey: #595959;
 </style>
 
 <template>
-	<backboard name="警报系统" :size="{w:780,h:620}">
+	<backboard name="警报系统" :size="{w:780,h:620}" :toshow="toshow">
 		<div class="warningctl">
 			<div class="leftBox">
 				<h3>最近警报</h3>
@@ -144,23 +144,10 @@ $grey: #595959;
 					{locate:'教三楼',month:'06',day:'03',time:'21:30',type:'有人入侵',solve:'解除'},
 					{locate:'教三楼',month:'06',day:'03',time:'21:30',type:'有人入侵',solve:'解除'},
 				]
-			}
-			
-		}},
-		props:
-		{
-			
-		},
-		components:
-		{
-			line:require('./line.vue'),
-			backboard:require('./backBoard.vue')
-		},
-		ready()
-		{
-			var element1 = this.$els.leftwrap;
-			var element2 = this.$els.rightwrap;
-			var options = 
+			},
+			scroller1:false,
+			scroller2:false,
+			options:
 			{
 				mouseWheel:true,
 				scrollbars:true,
@@ -168,8 +155,31 @@ $grey: #595959;
 				snap:true,
 				fadeScrollbars:true
 			}
-			var myScroll1 = new iScroll(element1,options);
-			var myScroll2 = new iScroll(element2,options);
+		}},
+		props:
+		{
+			toshow:{type:Boolean, default:false}
+		},
+		components:
+		{
+			line:require('./line.vue'),
+			backboard:require('./backBoard.vue')
+		},
+		ready() { },
+		watch:
+		{
+			"toshow":function(isShow)
+			{
+				if(isShow&&(!this.scroller1))
+				{
+					var _this = this;
+					setTimeout(function()
+					{
+						_this.scroller1 = new iScroll(_this.$els.leftwrap ,_this.options);
+						_this.scroller2 = new iScroll(_this.$els.rightwrap,_this.options);
+					},600);
+				}
+			}
 		}
 	}
 </script>

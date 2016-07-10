@@ -9,6 +9,9 @@
 <script>
 	module.exports =
 	{
+		data() {return{
+			
+		}},
 		components:
 		{
 			cEnv: require('./c-env.vue'),

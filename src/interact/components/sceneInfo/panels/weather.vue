@@ -49,7 +49,7 @@ $colorLine:#6cf09c;
 </style>
 
 <template>
-	<backboard name="天气状态" :size="{w:500,h:620}">
+	<backboard name="天气状态" :size="{w:500,h:620}" :toshow="toshow">
 		<div class="wrapper" v-el:wrap>
 			<ul>
 				<template v-for="item in items">
@@ -83,6 +83,7 @@ $colorLine:#6cf09c;
 <script>
 
 	const iScroll = require('iscroll');
+
 	module.exports =
 	{
 		data() {return {
@@ -123,21 +124,9 @@ $colorLine:#6cf09c;
 					temprange:'13°C ~ 19°C',temp:'实时15°C',pollution:'重度污染',
 					hum:'234%RH',PM2_5:'234 严重超标',wind:'3级东北风'
 				}
-			]
-		}},
-		props:
-		{
-			
-		},
-		components:
-		{
-			line:require('./line.vue'),
-			backboard:require('./backBoard.vue')
-		},
-		ready()
-		{
-			var element = this.$els.wrap;
-			var options = 
+			],
+			scroller:false,
+			options:
 			{
 				mouseWheel:true,
 				scrollbars:true,
@@ -145,9 +134,27 @@ $colorLine:#6cf09c;
 				snap:true,
 				fadeScrollbars:true
 			}
-			var myScroll = new iScroll(element,options);
-			console.dir(myScroll.options);
-
+		}},
+		props:
+		{
+			toshow:{type:Boolean, default:false}
+		},
+		components:
+		{
+			line:require('./line.vue'),
+			backboard:require('./backBoard.vue')
+		},
+		ready() { },
+		watch:
+		{
+			"toshow":function(isShow)
+			{
+				if(isShow&&(!this.scroller))
+				{
+					var _this = this;
+					setTimeout(()=>{_this.scroller = new iScroll(_this.$els.wrap,_this.options);},600);
+				}
+			}
 		}
 	}
 </script>

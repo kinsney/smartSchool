@@ -3,9 +3,7 @@
 </style>
 <template>
 	<top-bar></top-bar>
-	<goback></goback>
 	<angle-ctl></angle-ctl>
-	<login-box></login-box>
 	<scene-info></scene-info>
 	<switch-floor></switch-floor>
 	<map-box></map-box>
@@ -17,12 +15,10 @@
 	{
 		components:
 		{
-			topBar: require('./topBar.vue'),
-			loginBox: require('./login.vue'),
-			sceneInfo:require('./sceneInfo.vue'),
+			topBar: require('./topBar/index.vue'),
+			sceneInfo:require('./sceneInfo/index.vue'),
 			mapBox:require('./map.vue'),
 			bottomBar:require('./bottomBar/bottomBar.vue'),
-			goback:require('./goback.vue'),
 			switchFloor:require('./switchFloor.vue'),
 			angleCtl:require('./angleCtl.vue'),
 		}

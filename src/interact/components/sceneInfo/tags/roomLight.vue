@@ -123,7 +123,7 @@ $colorBt : #2fae5d;
 </style>
 
 <template>
-	<div class="room-lamp" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="room-lamp" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span>灯泡</span>
@@ -158,6 +158,8 @@ $colorBt : #2fae5d;
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
+
 	module.exports =
 	{
 		data() {return{
@@ -166,8 +168,18 @@ $colorBt : #2fae5d;
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on off error
+			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			state: { type:String, default:"on" }, // on off error
+			objName: { type:String, default:"RoomLight" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
+		},
+		computed:
+		{
+			pos()
+			{
+				return {x:this.tagPos.x,y:this.tagPos.y};
+			}
 		},
 		methods:
 		{

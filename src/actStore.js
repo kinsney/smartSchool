@@ -15,22 +15,22 @@ const state =
 			Environment:
 			{ 
 				hardware:{streetLight:true},
-				panel:{weather:true,streetLight:true} 
+				panel:{weather:false,streetLight:false} 
 			},
 			Security:
 			{ 
 				hardware:{camera:true},
-				panel:{camera:true,warning:true} 
+				panel:{camera:false,warning:false} 
 			},
 			Energy:
 			{ 
 				hardware:{energy:true},
-				panel:{energy:true} 
+				panel:{energy:false} 
 			},
 			Asset:
 			{ 
 				hardware:{breaker:true,camera:true,streetLight:true},
-				panel:{asset:true} 
+				panel:{asset:false} 
 			}
 		},
 		building:
@@ -38,22 +38,22 @@ const state =
 			Environment:
 			{ 
 				hardware:{},
-				panel:{weather:true} 
+				panel:{weather:false} 
 			},
 			Security:
 			{ 
 				hardware:{camera:true},
-				panel:{camera:true,warning:true} 
+				panel:{camera:false,warning:false} 
 			},
 			Energy:
 			{ 
 				hardware:{},
-				panel:{energy:true} 
+				panel:{energy:false} 
 			},
 			Asset:
 			{ 
 				hardware:{camera:true},
-				panel:{asset:true} 
+				panel:{asset:false} 
 			}
 		},
 		floor:
@@ -61,28 +61,27 @@ const state =
 			Environment:
 			{ 
 				hardware:{aircon:true,roomLight:true},
-				panel:{weather:true} 
+				panel:{weather:false} 
 			},
 			Security:
 			{ 
 				hardware:{camera:true,smogSensor:true,door:true},
-				panel:{camera:true,warning:true} 
+				panel:{camera:false,warning:false} 
 			},
 			Energy:
 			{ 
 				hardware:{energy:true},
-				panel:{energy:true} 
+				panel:{energy:false} 
 			},
 			Asset:
 			{ 
 				hardware:{aircon:true,roomLight:true,camera:true,smogSensor:true,door:true,equipment:true,breaker:true},
-				panel:{asset:true} 
+				panel:{asset:false} 
 			}
 		}
 	}
 };
 
-// window.test = state.selectors['floor']['Asset']['hardware'];
 
 const mutations =
 {

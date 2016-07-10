@@ -4,11 +4,7 @@
 	
 	.v-tags 
 	{ 
-		height:100%; 
-		box-sizing:border-box;
-		padding-bottom:60px;
-		position:relative;
-		z-index:0;
+		
 	}
 
 </style>
@@ -19,12 +15,12 @@
 			<component 
 				:is="key" 
 				v-for="item in val"
-				v-show="hardware[key]"
 
-				:obj="item.obj" 
+				:toshow="hardware[key]"
+				:obj-name="item.obj" 
 				:state="item.state" 
-				:pos="item.tagpos" 
-				:data="item.data">
+				:tag-pos="item.tagpos" 
+				:tag-data="item.data">
 			</component>
 		</template>
 	</div>
@@ -44,7 +40,7 @@
 				streetLight:
 				[
 					{obj:"nameOfObj",state:"on",tagpos:{x:100,y:300,z:0},data:{}},
-					{obj:"nameOfObj",state:"on",tagpos:{x:300,y:300,z:0},data:{}}
+					{obj:"nameOfObj",state:"error",tagpos:{x:300,y:300,z:0},data:{}}
 				],
 				breaker:
 				[

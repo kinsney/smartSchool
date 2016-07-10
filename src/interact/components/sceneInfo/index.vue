@@ -5,8 +5,7 @@
 <template>
 	<info-sum></info-sum>
 	<tags></tags>
-	<!-- <panel></panel> -->
-	<!-- <component :is="currentView"></component> -->
+	<panel></panel>
 </template>
 
 <script>
@@ -16,9 +15,9 @@
 		}},
 		components:
 		{
-			infoSum:require('./sceneInfo/infoSum/index.vue'),
-			tags:require('./sceneInfo/tags/index.vue'),
-			panel:require('./sceneInfo/panels/index.vue')
+			infoSum:require('./infoSum/index.vue'),
+			tags:require('./tags/index.vue'),
+			panel:require('./panels/index.vue')
 		},
 		vuex:
 		{

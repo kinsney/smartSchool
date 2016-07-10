@@ -38,7 +38,7 @@ $colorLine:#6cf09c;
 </style>
 
 <template>
-	<backboard name="资产管理" :size="{w:800,h:620}">
+	<backboard name="资产管理" :size="{w:800,h:620}" :toshow="toshow">
 		<div class="wrapper" v-el:wrap>
 			<div>
 				<table class="filter">
@@ -46,7 +46,7 @@ $colorLine:#6cf09c;
 						<td v-for="item in filter.items" 
 							v-text="item" 
 							:class="{nowitem:filter.nowitem==item}" 
-							@click="filter.nowitem=item;" ></td>
+							@click="doFilter(item)" ></td>
 					</tr>
 				</table>
 				<div class="ctl">
@@ -114,21 +114,9 @@ $colorLine:#6cf09c;
 				{device:'摄像头',type:'损坏',locate:'教三楼',breaktime:'2016/03/04 21:30',fixedtime:'待恢复'},
 				{device:'断路器',type:'损坏',locate:'教三楼',breaktime:'2016/03/04 21:30',fixedtime:'待恢复'},
 				{device:'路灯',type:'损坏',locate:'教三楼',breaktime:'2016/03/04 21:30',fixedtime:'待恢复'},
-			]
-		}},
-		props:
-		{
-			
-		},
-		components:
-		{
-			line:require('./line.vue'),
-			backboard:require('./backBoard.vue')
-		},
-		ready()
-		{
-			var element = this.$els.wrap;
-			var options = 
+			],
+			scroller:false,
+			options:
 			{
 				mouseWheel:true,
 				scrollbars:true,
@@ -136,9 +124,36 @@ $colorLine:#6cf09c;
 				snap:true,
 				fadeScrollbars:true
 			}
-			var myScroll = new iScroll(element,options);
-			console.dir(myScroll.options);
-
+		}},
+		props:
+		{
+			toshow:{type:Boolean, default:false}
+		},
+		components:
+		{
+			line:require('./line.vue'),
+			backboard:require('./backBoard.vue')
+		},
+		methods:
+		{
+			doFilter(item)
+			{
+				this.filter.nowitem = item;
+				var _this = this;
+				setTimeout(()=>{_this.scroller.refresh();},100);
+			}
+		},
+		ready() { },
+		watch:
+		{
+			"toshow":function(isShow)
+			{
+				if(isShow&&(!this.scroller))
+				{
+					var _this = this;
+					setTimeout(()=>{_this.scroller = new iScroll(_this.$els.wrap,_this.options);},600);
+				}
+			}
 		}
 	}
 </script>

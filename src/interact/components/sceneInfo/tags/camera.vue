@@ -109,7 +109,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-camera" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
+	<div class="tag-camera" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
 		<div class="tag" @mouseenter="show">
 			<img v-if="state=='on'" src="img/camera-on.png" />
 			<img v-if="state=='off'" src="img/camera-off.png" />
@@ -147,6 +147,8 @@ $colorBg : rgba(0,0,0,0.75);
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
+
 	module.exports =
 	{
 		data() {return{
@@ -157,8 +159,11 @@ $colorBg : rgba(0,0,0,0.75);
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on off error
+			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			state: { type:String, default:"on" }, // on off error
+			objName: { type:String, default:"Camera" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
 		},
 		computed:
 		{
@@ -167,7 +172,8 @@ $colorBg : rgba(0,0,0,0.75);
 			{
 				var date = new Date();
 				return date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDay()+'日--';
-			}
+			},
+			pos() { return {x:this.tagPos.x,y:this.tagPos.y}; }
 		},
 		methods:
 		{

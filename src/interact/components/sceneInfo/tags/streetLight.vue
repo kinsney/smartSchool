@@ -80,7 +80,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-lamp" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
+	<div class="tag-lamp" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
 		<div class="tag" @mouseenter="show">
 			<img v-if="state=='on'" src="img/lamp-on.png" />
 			<img v-if="state=='off'" src="img/lamp-off.png" />
@@ -104,6 +104,8 @@ $colorBg : rgba(0,0,0,0.75);
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
+
 	module.exports =
 	{
 		data() {return{
@@ -113,8 +115,18 @@ $colorBg : rgba(0,0,0,0.75);
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
-			state: { type:String, default:"on" } // on off error
+			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			state: { type:String, default:"on" }, // on off error
+			objName: { type:String, default:"Aircondition" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
+		},
+		computed:
+		{
+			pos()
+			{
+				return {x:this.tagPos.x,y:this.tagPos.y};
+			}
 		},
 		methods:
 		{

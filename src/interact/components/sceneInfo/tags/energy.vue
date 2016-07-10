@@ -76,7 +76,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-energy" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="tag-energy" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span v-show="!open" v-text="'日均能耗:'+energy"></span>
@@ -109,14 +109,18 @@ $colorBg : rgba(0,0,0,0.75);
 		}},
 		props:
 		{
-			tagpos: {type: Object, default:()=>{return { x:0,y:5000,z:0 };}}
+			tagPos: {type: Object, default:()=>{return { x:0,y:5000,z:0 };}},
+			state: { type:String, default:"on" }, // this tag has no state
+			objName: { type:String, default:"Energy" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
 		},
 		computed:
 		{
 			pos()
 			{
 				var ranbingluan = this.cameraPos.x;
-				return getPos(this.tagpos);
+				return getPos(this.tagPos);
 			}
 		},
 		methods:

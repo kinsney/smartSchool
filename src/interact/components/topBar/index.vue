@@ -113,7 +113,7 @@ $marginSide : 30px;
 	}
 	.switch
 	{
-		position:absolute; top:0; right:120px;
+		position:absolute; top:0; left:220px;
 		padding-top: $padTop;
 		height:$barH;
 		margin-right:$marginSide;
@@ -130,21 +130,21 @@ $marginSide : 30px;
 		<div class="leftPart">
 			<div class="noLogin" v-if="!isLogin">
 				<div class="title" @click="loginBox">
-					<img src="./img/topBar/user.png" />
+					<img src="./img/user.png" />
 					<span>游客模式</span>
 				</div>
 			</div>
 			<div class="isLogin" v-if="isLogin">
 				<div class="title">
-					<img src="./img/topBar/user.png" />
+					<img src="./img/user.png" />
 					<span>管理员模式</span>
 				</div>
 				<div class="item">
-					<img src="./img/topBar/data.png" />
+					<img src="./img/data.png" />
 					<span>模型创建</span>
 				</div>
 				<div class="item">
-					<img src="./img/topBar/modle.png" />
+					<img src="./img/modle.png" />
 					<span>管理员数据</span>
 				</div>
 				<div class="infoBox" @click="logout">
@@ -158,19 +158,21 @@ $marginSide : 30px;
 		<div class="centPart">
 			<div class="bar"></div>
 			<div class="cent">
-				<img src="./img/topBar/centPart.png" />
+				<img src="./img/centPart.png" />
 				<h2 v-text="campusName"></h2>
 			</div>
 		</div>
 		<div class="rightPart">
-			<img class="logo" src="./img/topBar/logo.png" />
+			<img class="logo" src="./img/logo.png" />
 		</div>
 		<ul class="switch" v-el:switch>
 			<li :class="{now:scope=='campus'}">campus</li>
 			<li :class="{now:scope=='building'}">building</li>
 			<li :class="{now:scope=='floor'}">floor</li>
 		</ul>
+		<goback></goback>
 	</div>
+	<login-box></login-box>
 </template>
 
 <script>
@@ -185,6 +187,11 @@ $marginSide : 30px;
 			login() {this.$store.dispatch('switchLogin',true); },
 			logout() {this.$store.dispatch('switchLogin',false); },
 			loginBox() {this.$store.dispatch('switchLoginBox',true); }
+		},
+		components:
+		{
+			loginBox: require('./login.vue'),
+			goback:require('./goback.vue')
 		},
 		vuex:
 		{

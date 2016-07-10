@@ -81,7 +81,7 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="smog-sensor" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="smog-sensor" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span>烟雾传感器</span>
@@ -103,17 +103,29 @@ $colorBg : rgba(0,0,0,0.75);
 
 <script>
 	const $ = require('jquery');
+	const getPos = require('./getPos.js');
+
 	module.exports =
 	{
 		data() {return{
 			smog:"1691 正常",
-			locate:"教四楼"
+			locate:"教四楼",
+			danger: { type:Boolean, default:false }
 		}},
 		props:
 		{
-			pos: {type: Object, default:()=>{return { x:200,y:300 };}},
+			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
 			state: { type:String, default:"on" }, // on error
-			danger: { type:Boolean, default:false }
+			objName: { type:String, default:"SmogSensor" },
+			tagData:{type: Object, default:()=>{return {};}},
+			toshow:{type:Boolean, default:true}
+		},
+		computed:
+		{
+			pos()
+			{
+				return {x:this.tagPos.x,y:this.tagPos.y};
+			}
 		},
 		methods:
 		{
