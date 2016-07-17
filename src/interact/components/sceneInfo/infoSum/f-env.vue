@@ -73,11 +73,11 @@ $colorBt : rgba(255,255,255,0.1);
 	{
 		data() {return{
 			tempAverage:"16°C 怡人",
-			hum:"234RH%",
+			hum:"50%RH",
 			AQI:"23 优",
-			CO2:"223/m³",
-			VOC:"223/m³",
-			light:"23 明亮"
+			CO2:"800ppm",
+			VOC:"0.06ppm",
+			light:"100lux"
 		}},
 		components:
 		{

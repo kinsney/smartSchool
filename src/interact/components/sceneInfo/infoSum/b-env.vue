@@ -54,7 +54,7 @@ $colorBt : rgba(255,255,255,0.1);
 		data() {return{
 			temp:"23°C 舒适",
 			wind:"654 m³",
-			aircon:"1293 kj"
+			aircon:"1800m3/h"
 		}},
 		components:
 		{

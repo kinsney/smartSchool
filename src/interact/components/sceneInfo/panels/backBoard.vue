@@ -22,7 +22,7 @@
 </style>
 
 <template>
-	<div class="v-panelBoard" v-show="toshow" :style="{width:size.w+'px',height:size.h+'px',marginLeft:(-size.w/2)+'px'}" transition="switch" transition-mode="out-in" @mousedown.stop="">
+	<div class="v-panelBoard" v-show="toshow" :style="{width:size.w+'px',height:size.h+'px',marginLeft:(-size.w/2)+'px'}" transition="switch" transition-mode="out-in" @mousedown.stop @mousewheel.stop >
 		<div class="close" @click="closePanel"><img src="./img/close.png" /></div>
 		<h2 class="panelName" v-text="name"></h2>
 		<line margin="10px auto 30px"></line>

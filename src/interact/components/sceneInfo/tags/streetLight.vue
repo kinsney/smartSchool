@@ -74,7 +74,6 @@ $colorBg : rgba(0,0,0,0.75);
 		&.on { @include state($green); }
 		&.off { @include state($black); }
 		&.error { @include state($red); }
-		&.overload { @include state($yellow); }
 	}
 }
 </style>

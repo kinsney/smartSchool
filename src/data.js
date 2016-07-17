@@ -11,10 +11,10 @@
  * 
 ——————————————————————————————————————————————————————————————**/
 
-var scopeCampus  = { D:require('./dataModel/campus.json') };
-var scopeBuiding = { D:require('./dataModel/building.json') };
-var scopeFloor   = { D:require('./dataModel/floor.json') };
-var globalInfo   = { D:require('./dataModel/globalInfo.json') };
+var scopeCampus  = require('./dataModel/campus.json');
+var scopeBuiding = require('./dataModel/building.json');
+var scopeFloor   = require('./dataModel/floor.json');
+var globalInfo   = require('./dataModel/globalInfo.json');
 
 /**
  * [根据后台传过来的值，动态修改model的值]
@@ -29,6 +29,7 @@ exports.campus = scopeCampus;
 exports.building = scopeBuiding;
 exports.floor = scopeFloor;
 exports.globalInfo = globalInfo;
+
 
 
 

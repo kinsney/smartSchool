@@ -87,8 +87,8 @@ $colorBt : rgba(255,255,255,0.1);
 		data() {return{
 			weather:{type:1,tag:"多云转小雨"},
 			temp:{range:"12°C ~ 19°C",now:"16°C 怡人"},
-			hum:"234RH%",
-			air:"234 严重超标",
+			hum:"35%RH",
+			air:"30μg/m3 优",
 			wind:"3级东北风"
 		}},
 		components:
