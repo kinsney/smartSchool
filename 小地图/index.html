@@ -1,28 +1,22 @@
-<style lang="sass" scoped>
-$greenA : #278d4c;
-$padBottom: 3px;
-$barH : 60px;
-$mathSide : 10px;
-$size : 200px;
-
-* { font-family: 'PingFang SC','微软雅黑' ;}
-.v-mapBox
-{
-	position:absolute; right:$mathSide; bottom:$mathSide + $barH + $padBottom;
-	width:$size; height:$size;border: 2px solid $greenA;border-radius: 500px;
-	overflow:hidden;
-
-	img{display:block; height:100%; width:100%;}
-	svg polygon:hover { fill:red; }
-
-}
-</style>
-
-<template>
-	<div class="v-mapBox" v-show="isCampus"  @mousedown.stop="">
-		<!-- <img src="./img/map/map.png" /> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SVG</title>
+	<style>
+		.map
+		{
+			border: 1px solid green;  width: 300px;  height: 300px;
+			overflow: hidden; border-radius:150px;
+		}
+	</style>
+	<script src="jquery-1.8.3.min.js"></script>
+</head>
+<body>
+	
+	<div class="map">
 		<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-		 width="200px" height="200px" viewBox="0 0 170.667 118" enable-background="new 0 0 170.667 118" xml:space="preserve">
+		 width="853px" height="590px" viewBox="0 0 170.667 118" enable-background="new 0 0 170.667 118" xml:space="preserve">
 			<polygon fill="#9AE29C" points="28.697,16.801 26.199,50.29 37.704,50.29 39.553,17.828 "/>
 			<polygon fill="#065906" points="18.545,55.53 17.313,74.946 41.351,75.87 43.046,56.3 "/>
 			<polygon fill="#151615" points="45.82,56.608 43.817,90.047 58.764,90.047 58.764,56.608 "/>
@@ -37,20 +31,33 @@ $size : 200px;
 			<polygon fill="#4B594B" points="110.231,80.955 109.461,98.676 130.418,97.443 132.113,82.034 "/>
 		</svg>
 	</div>
-</template>
+	
 
-<script>
-	module.exports =
-	{
-		data() {return{
-			
-		}},
-		vuex:
+	<div class="box">
+		
+	</div>
+
+	<script>
+		$(document).ready(function()
 		{
-			getters:
+			$('svg polygon').mouseenter(function()
 			{
-				isCampus: ({routeSite}) => {return routeSite.scope == "campus";}
-			}
-		}
-	}
-</script>
+				this.color = $(this).attr('fill');
+				$(this).attr('fill','#E6362B');
+			});
+			$('svg polygon').mouseleave(function()
+			{
+				var color = this.color;
+				$(this).attr('fill',color);
+			});
+
+			// var route = 'http://localhost:8080/admin/jason';
+			// var data = {id:1,username:'商家双',password:'222'};
+			// $.get(route,data,function(data,status)
+			// {
+			// 	console.dir(data);
+			// });
+		});
+	</script>
+</body>
+</html>
