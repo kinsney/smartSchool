@@ -22,7 +22,7 @@
 			<span>返回园区</span>
 		</div>
 		<div class="vLine" v-show="scope=='floor'"></div>
-		<div class="tobuilding" v-show="scope=='floor'" @click="store.currentObjectName=store.building.name">
+		<div class="tobuilding" v-show="scope=='floor'" @click="store.currentObjectName=store.building.name,store.building.currentFloor=null">
 			<img src="./img/back.png" />
 			<span>返回大楼</span>
 		</div>

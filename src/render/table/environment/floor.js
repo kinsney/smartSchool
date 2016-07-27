@@ -5,22 +5,23 @@ const actStore = require('../../../actStore')
 const floor = module.exports = new THREE.Object3D
 const utils = require('../../plugins/utils')
 floor.rotation.y = Math.PI * 45 / 180
-actStore.watch('routeSite.scope',(value) =>
+store.$watch('building.currentFloor',(value) =>
 {
-    if(value == "floor")
-    {
-        setTimeout(function(){
-            var currentFloor = store.building.currentFloor
-            let floorObject = model(currentFloor,0,0,0)
-            floor.add(floorObject)
-            floor.position.set(0,50,0)
-        },2000)
 
-    }else{
         for (let mesh = floor.children[0]; mesh != null; mesh = floor.children[0])
         {
             utils.dispose(mesh)
             floor.remove(mesh)
         }
-    }
-},{deep:true})
+        if(value){
+          setTimeout(function(){
+              var currentFloor = value
+              let floorObject = model(currentFloor,0,0,0)
+              floor.add(floorObject)
+              floor.position.set(0,50,0)
+          },2000)
+        }
+
+
+}
+,{deep:true})
