@@ -47,7 +47,9 @@
 				// 	{obj:"nameOfObj",state:"on",tagpos:{x:100,y:500,z:0},data:{}},
 				// 	{obj:"nameOfObj",state:"on",tagpos:{x:300,y:500,z:0},data:{}}
 				// ]
-			},
+				roomLight: 
+				[{obj:'building1-4-jiaoshideng',state:'on',tagpos:{x:1903,y:540,z:-4342},data:{}} ]
+			}
 		}},
 		components:
 		{

@@ -123,7 +123,7 @@ $colorBt : #2fae5d;
 </style>
 
 <template>
-	<div class="room-lamp" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="room-lamp" v-show="toshow&&objName==store.hoverObjectName" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span>灯泡</span>
@@ -165,6 +165,8 @@ $colorBt : #2fae5d;
 		data() {return{
 			locate:"教四楼",
 			intensity:168,
+			cameraPos:require('../../../../render/controller/camera.js').position,
+			store:require('../../../../store.js')
 		}},
 		props:
 		{
@@ -176,9 +178,14 @@ $colorBt : #2fae5d;
 		},
 		computed:
 		{
+			// pos()
+			// {
+			// 	return {x:this.tagPos.x,y:this.tagPos.y};
+			// }
 			pos()
 			{
-				return {x:this.tagPos.x,y:this.tagPos.y};
+				var ranbingluan = this.cameraPos.x;
+				return getPos(this.tagPos);
 			}
 		},
 		methods:
