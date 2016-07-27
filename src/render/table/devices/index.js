@@ -10,7 +10,7 @@ devices.name = 'devices'
 devices.rotation.y = Math.PI * 45 / 180
 store.$watch('building.currentFloor',(newValue,oldValue) =>
 {
-    if(newValue&&!oldValue)
+    if(typeof(newValue)=="number"&&oldValue===null)
     {
         let floorsLength = store.building.floors.length
         let currentFloor = store.building.currentFloor
@@ -58,7 +58,7 @@ store.$watch('building.currentFloor',(newValue,oldValue) =>
                         devices.position.set(0,0,0)
                     }),2000)
     }
-    if(newValue&&oldValue){
+    if(typeof(newValue)=="number"&&typeof(newValue)=="number"){
       for (let mesh = devices.children[0]; mesh != null; mesh = devices.children[0])
       {
           utils.dispose(mesh)
@@ -72,7 +72,7 @@ store.$watch('building.currentFloor',(newValue,oldValue) =>
                       devices.position.set(0,0,0)
                   })
     }
-    if(!newValue&&oldValue){
+    if(newValue===null&&typeof(oldValue)=="number"){
       for (let mesh = devices.children[0]; mesh != null; mesh = devices.children[0])
       {
           utils.dispose(mesh)

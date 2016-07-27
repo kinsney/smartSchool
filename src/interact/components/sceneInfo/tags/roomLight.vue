@@ -20,7 +20,7 @@ $colorBt : #2fae5d;
 		border-radius: 3px 3px 0 0;
 		border-bottom: 3px solid $green;
 		font-weight:lighter;
-		
+
 		.u
 		{
 			position: relative;
@@ -41,9 +41,9 @@ $colorBt : #2fae5d;
 			width:100%; height:1px;
 			margin: 7px 0;
 			background-color: $colorLine;
-			span 
-			{ 
-				position:absolute; height:3px; width:3px;  
+			span
+			{
+				position:absolute; height:3px; width:3px;
 				border-radius: 4px;
 				background-color: $colorLine;
 			}
@@ -52,7 +52,7 @@ $colorBt : #2fae5d;
 		}
 		.controls
 		{
-			overflow:hidden; height:0; color:white; font-size:12px; 
+			overflow:hidden; height:0; color:white; font-size:12px;
 			.control
 			{
 				text-align:center; margin:6px 0 10px;
@@ -101,10 +101,10 @@ $colorBt : #2fae5d;
 			position:absolute; bottom: -25px; left:50%;
 			width:1px; height:25px;
 			background-color: $green;
-			.dot 
-			{ 
+			.dot
+			{
 				position:absolute; left:-4px; bottom:0;
-				height:7px; width:7px;  
+				height:7px; width:7px;
 				border-radius: 4px;
 				background-color: $green;
 				border:1px solid black;
@@ -123,7 +123,7 @@ $colorBt : #2fae5d;
 </style>
 
 <template>
-	<div class="room-lamp" v-show="toshow&&objName==store.hoverObjectName" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="room-lamp" v-show="toshow&&scope=='floor'" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
 		<div class="info" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span>灯泡</span>
@@ -176,6 +176,15 @@ $colorBt : #2fae5d;
 			tagData:{type: Object, default:()=>{return {};}},
 			toshow:{type:Boolean, default:true}
 		},
+
+		vuex:
+		{
+			getters:
+			{
+				scope: ({routeSite}) => {return routeSite.scope},
+				menu: ({routeSite}) => {return routeSite.menu}
+			}
+		},
 		computed:
 		{
 			// pos()
@@ -190,13 +199,13 @@ $colorBt : #2fae5d;
 		},
 		methods:
 		{
-			hide() 
+			hide()
 			{
 				if(this.state!='on') return;
 				var ele = this.$els.info;
 				$(ele).find('.controls').stop().animate({height:0});
 			},
-			show() 
+			show()
 			{
 				if(this.state!='on') return;
 				var ele = this.$els.info;
