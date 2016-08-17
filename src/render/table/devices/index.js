@@ -7,7 +7,7 @@ const floors = require('../floors')
 const utils = require('../../plugins/utils.js')
 const devices = window.devices = module.exports = new THREE.Object3D
 devices.name = 'devices'
-devices.rotation.y = Math.PI * 45 / 180
+
 store.$watch('building.currentFloor',(newValue,oldValue) =>
 {
     if(typeof(newValue)=="number"&&oldValue===null)
@@ -53,7 +53,7 @@ store.$watch('building.currentFloor',(newValue,oldValue) =>
         setTimeout(Object.keys(store.devices).sort().forEach((value)=>
                     {
                         let deviceObject = store.devices[value]
-                        let device = build(value,deviceObject.x,deviceObject.y,deviceObject.z)
+                        let device = build(value)
                         devices.add(device)
                         devices.position.set(0,0,0)
                     }),2000)
@@ -67,7 +67,7 @@ store.$watch('building.currentFloor',(newValue,oldValue) =>
       Object.keys(store.devices).sort().forEach((value)=>
                   {
                       let deviceObject = store.devices[value]
-                      let device = build(value,deviceObject.x,deviceObject.y,deviceObject.z)
+                      let device = build(value)
                       devices.add(device)
                       devices.position.set(0,0,0)
                   })

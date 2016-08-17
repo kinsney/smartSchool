@@ -1,2 +1,2 @@
 require('./render');
-require('./interact');
+// require('./interact');
