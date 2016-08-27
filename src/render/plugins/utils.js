@@ -1,6 +1,6 @@
 const Vue = require('vue')
 const THREE = require('three')
-
+const TWEEN = require('tween')
 
 const loader = new THREE.JSONLoader()
 
@@ -78,78 +78,29 @@ const dispose = exports.dispose = mesh => {
   }
 }
 
-exports.initVM = (mesh, model, prefix, autoLoad = false) => new Vue({
+exports.initVM = (mesh, model) => new Vue({
   // options
   mesh: mesh,
   material: null,
-
   data: model,
   watch: {
-    color: {
-      handler: 'setColor',
+    position: {
+      handler: 'setPosition',
       deep: true
     },
-    specular: {
-      handler: 'setSpecular',
+    rotation: {
+      handler: 'setRotation',
       deep: true
     },
-    material: 'setMaterial',
-    choice: 'setChoice'
   },
   methods: {
-    setColor (color) {
-      const colorObject = toTHREEColorObject(color)
-      const material = this.$options.material
-      if (material != null) {
-        material.color = colorObject
-        if (this.material !== 'discolor') {
-          material.specular = colorObject.clone()
-        }
-      }
+    setPosition (position) {
+      let mesh = this.$options.mesh
+      new TWEEN.Tween(mesh.position).to(position,1000).easing(TWEEN.Easing.Elastic.Out).start()
     },
-    setSpecular (color) {
-      const colorObject = toTHREEColorObject(color)
-      const material = this.$options.material
-      material.specular = colorObject
-    },
-    setMaterial (materialStyle, oldMaterialStyle) {
-
-      const materialFunc = materials[materialStyle]
-      const material = this.$options.material
-      if (typeof materialFunc === 'function' && material != null) {
-        materialFunc(material)
-        material.needsUpdate = true
-      }
-      if (materialStyle === 'discolor') {
-        Vue.set(this, 'specular', Object.assign({}, this.color))
-      }
-      if (oldMaterialStyle === 'discolor') {
-        Vue.set(this, 'specular', Object.assign({}, this.color))
-      }
-    },
-    setChoice (choice) {
-      const mesh = this.$options.mesh
-
-      dispose(mesh)
-      this.$options.material = null
-
-      load(mesh, choice ? prefix + choice : '', true, () => {
-        this.$emit('load')
-      })
-    }
-  },
-  events: {
-    load () {
-      this.$options.material = getPureMaterial(mesh)
-      this.setColor(this.color)
-      this.setMaterial(this.material)
-    }
-  },
-  created () {
-    if (autoLoad) {
-      this.setChoice(this.choice)
-    } else {
-      this.$emit('load')
+    setRotation (rotation) {
+      let mesh = this.$options.mesh
+      new TWEEN.Tween(mesh.rotation).to(rotation,1000).easing(TWEEN.Easing.Elastic.Out).start()
     }
   }
 })
@@ -161,4 +112,10 @@ exports.hover = (mesh, value) => {
       material.emissive = color
     })
   }
+}
+
+window.opendoor = (mesh) => {
+  let close = {x:0,y:0,z:0}
+  let open = {x:0,y:-1.5707963267948966,z:0}
+  new TWEEN.Tween(mesh.rotation).to(mesh.rotation==close?open:close,1000).easing(TWEEN.Easing.Elastic.Out).start()
 }

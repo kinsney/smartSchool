@@ -6,7 +6,6 @@ const actStore = require('../../../actStore')
 const utils = require('../../plugins/utils')
 const floorsObject = module.exports = new THREE.Object3D
 floorsObject.name = 'floors'
-floorsObject.rotation.y = Math.PI * 45 / 180
 actStore.watch('routeSite.scope',(newValue,oldValue) =>
 {
     if(newValue == "building")

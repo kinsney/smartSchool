@@ -4,7 +4,6 @@ const store = require('../../../store')
 const actStore = require('../../../actStore')
 const floor = module.exports = new THREE.Object3D
 const utils = require('../../plugins/utils')
-floor.rotation.y = Math.PI * 45 / 180
 store.$watch('building.currentFloor',(newValue,oldValue) =>
 {
 
