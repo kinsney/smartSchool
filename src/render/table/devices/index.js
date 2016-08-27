@@ -17,8 +17,7 @@ store.$watch('building.currentFloor',(newValue,oldValue) =>
 
         new TWEEN.Tween(floors.children[currentFloor].position).to({
             x:0,y:0,z:0
-        },2000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
-        }).start()
+        },2000).easing(TWEEN.Easing.Elastic.Out).start()
 
         for (let a=currentFloor+1;a<floorsLength;a++)
         {

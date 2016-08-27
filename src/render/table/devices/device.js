@@ -1,6 +1,6 @@
 const THREE = require('three')
 const store = require('../../../store')
-
+const utils = require('../../plugins/utils')
 const build = exports.build = (name) =>
 {
     const loader = new THREE.JSONLoader()
@@ -15,7 +15,8 @@ const build = exports.build = (name) =>
       const material = new THREE.MeshFaceMaterial(materials)
       Object.assign(mesh,{geometry,material})
     })
-    mesh.position.set(object.position.x,object.position.y,object.position.z)
+    mesh.vm = utils.initVM(mesh,object)
+    Object.assign(mesh.position,object.position)
     Object.assign(mesh.rotation,object.rotation)
     return mesh
 }
