@@ -48,7 +48,7 @@
 				// 	{obj:"nameOfObj",state:"on",tagpos:{x:300,y:500,z:0},data:{}}
 				// ]
 				roomLight: 
-				[{obj:'building1-4-jiaoshideng',state:'on',tagpos:{x:1903,y:540,z:-4342},data:{}} ]
+				[{obj:'building1-4-jiaoshideng',state:'on',tagpos:{x:200,y:700,z:-4342},data:{}} ]
 			}
 		}},
 		components:
@@ -78,6 +78,10 @@
 			tagData()
 			{
 				//根据 scope 和 menu 的值动态的去读取新的 tagData
+				//几种交互方式的实现
+				// 1 悬停出现：用objectname去匹配hoverobjectname————>到v-show上
+				// 2 按距离加载：直接用computed去计算与相机之间的距离————>到v-show上
+				// 3 按房间视角加载：name中包含room字段，匹配currentRoom————>到v-show上
 				
 			}
 		}
