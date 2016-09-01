@@ -65,13 +65,8 @@ window.store = module.exports = new Vue({
          }
       }
    },
-   ready() 
+   ready()
    {
-      
+
    }
 });
-
-
-
-
-
