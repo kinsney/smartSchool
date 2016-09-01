@@ -15,12 +15,12 @@
 	{
 		components:
 		{
-			topBar: require('./topBar/index.vue'),
-			sceneInfo:require('./sceneInfo/index.vue'),
-			mapBox:require('./map.vue'),
-			bottomBar:require('./bottomBar/bottomBar.vue'),
-			switchFloor:require('./switchFloor.vue'),
-			angleCtl:require('./angleCtl.vue'),
+			topBar: require('./components/topBar/index.vue'),
+			sceneInfo:require('./components/sceneInfo/index.vue'),
+			mapBox:require('./components/map.vue'),
+			bottomBar:require('./components/bottomBar/bottomBar.vue'),
+			switchFloor:require('./components/switchFloor.vue'),
+			angleCtl:require('./components/angleCtl.vue'),
 		}
 	}
 </script>

@@ -1,0 +1,106 @@
+{
+    "building1":
+    {
+        "floors":
+        [
+            {},
+            {},
+            {},
+            {},
+            {
+                "jiaoshideng":{
+                    "position":{"x":4342, "y":540, "z":-1500 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"roomLight"
+                },
+                "jiaoshi_door":{
+                    "position":{"x":5781, "y":11, "z":-435 },
+                    "rotation":{"x":0, "y":-1.5707963267948966, "z":0 },
+                    "model":"door"
+                },
+                "jiaoshi_condition":{
+                    "position":{"x":5900, "y":10, "z":-2669 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"aircon"
+                },
+                "jiaoshi_board":{
+                    "position":{"x":5333, "y":229, "z":-393 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"classBoard"
+                },
+                "jiaoshi_watcher":{
+                    "position":{"x":2690, "y":537, "z":-1663 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"camera"
+                },
+                "jiaoshi_clear":{
+                    "position":{"x":6061, "y":10, "z":-2669 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"gasPurifier"
+                },
+                "jiaoshi_window":{
+                    "position":{"x":5206, "y":238, "z":-2732 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"curtain"
+                },
+                "jiaoshi_yankong":{
+                    "position":{"x":4440, "y":544, "z":-1599 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"smogSensor"
+                },
+                "jifang_deng":{
+                    "position":{"x":35, "y":540, "z":-1604 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"roomLight"
+                },
+                "jifang_door":{
+                    "position":{"x":2255, "y":11, "z":-435 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"door"
+                },
+                "jifang_window1":{
+                    "position":{"x":1555, "y":238, "z":-2732 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"curtain"
+                },
+                "jifang_yankong":{
+                    "position":{"x":-289, "y":544, "z":-1599 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"smogSensor"
+                },
+                "jifang_condition":{
+                    "position":{"x":2372, "y":10, "z":-2619 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"aircon"
+                },
+                "jifang_clear":{
+                    "position":{"x":2212, "y":10, "z":-2669 },
+                    "rotation":{"x":0, "y":0, "z":0 },
+                    "model":"gasPurifier"
+                },
+                "bangongshi_door":{
+                    "position":{"x":4117, "y":11, "z":406 },
+                    "rotation":{"x":0, "y":-1.5707963267948966, "z":0 },
+                    "model":"door"
+                },
+                "lingdao_door":{
+                    "position":{"x":2254, "y":11, "z":406 },
+                    "rotation":{"x":0, "y":-1.5707963267948966, "z":0 },
+                    "model":"door"
+                },
+                "huiyi_door":{
+                    "position":{"x":-1976, "y":11, "z":403 },
+                    "rotation":{"x":0, "y":-1.5707963267948966, "z":0 },
+                    "model":"door"
+                },
+                "shixun_door":{
+                    "position":{"x":-4196, "y":11, "z":-1058 },
+                    "rotation":{"x":0, "y":-1.5707963267948966, "z":0 },
+                    "model":"door"
+                }
+            }
+        ],
+        "position":{"x":-1103,"y":0,"z":-23933},
+        "floors_height":800
+    }
+}

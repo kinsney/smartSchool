@@ -14,7 +14,7 @@ const App = Vue.extend(
 	store:actStore,
 	components: 
 	{
-		interact: require('./components/app.vue')
+		interact: require('./app.vue')
 	}
 });
 router.start(App, '#interact');
@@ -26,7 +26,7 @@ module.exports = new Vue(
   store:actStore,
   components: 
   {
-    interact: require('./components/app.vue')
+    interact: require('./app.vue')
   }
 })
 */

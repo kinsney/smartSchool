@@ -3,7 +3,7 @@ const THREE = require('three')
 const build = require('./building').build
 const utils = require('../../plugins/utils.js')
 const store = require('../../../store')
-const buildingJson = require('../../buildings.json')
+const buildingJson = require('../../../dataModel/data.json')
 
 
 const buildings = module.exports = new THREE.Object3D

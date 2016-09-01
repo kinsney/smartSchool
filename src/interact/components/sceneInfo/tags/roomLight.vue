@@ -119,12 +119,14 @@ $colorBt : #2fae5d;
 		&.off { @include state($black); }
 		&.error { @include state($red); }
 	}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
 }
 </style>
 
 <template>
 	<div class="room-lamp" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
-		<div class="info" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
+		<div class="info" v-show="disShow" transition="tag" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
 			<div class="u">
 				<span>灯泡</span>
 				<img src="img/more.png" />
@@ -175,26 +177,23 @@ $colorBt : #2fae5d;
 			tagData:{type: Object, default:()=>{return {};}},
 			toshow:{type:Boolean, default:true}
 		},
-
-		vuex:
-		{
-			getters:
-			{
-				scope: ({routeSite}) => {return routeSite.scope},
-				menu: ({routeSite}) => {return routeSite.menu}
-			}
-		},
 		computed:
 		{
-			// pos()
-			// {
-			// 	return {x:this.tagPos.x,y:this.tagPos.y};
-			// }
 			pos()
 			{
-				return {x:this.tagPos.x,y:this.tagPos.y};
+				// return {x:this.tagPos.x,y:this.tagPos.y};
 				var ranbingluan = this.cameraPos.x;
 				return getPos(this.tagPos);
+			},
+			disShow()
+			{
+				var deltaX = this.cameraPos.x-this.tagPos.x;
+				var deltaY = this.cameraPos.y-this.tagPos.y;
+				var deltaZ = this.cameraPos.z-this.tagPos.z;
+
+				var dis = Math.sqrt(deltaX*deltaX+deltaY*deltaY+deltaZ*deltaZ);
+				if(dis>5000) return false;
+				else return true;
 			}
 		},
 		methods:

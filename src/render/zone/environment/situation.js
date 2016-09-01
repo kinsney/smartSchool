@@ -4,7 +4,7 @@ const situation = module.exports = new THREE.Object3D();
 const makeSkyBox = require('../../plugins/makeSkybox.js');
 const loader = new THREE.JSONLoader()
 
-// makeSkyBox('type1',situation);
+makeSkyBox('type1',situation);
 
 
 // create the ground plane for test

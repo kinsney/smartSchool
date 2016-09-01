@@ -155,7 +155,8 @@ $colorBg : rgba(0,0,0,0.75);
 			statetag:{on:"开启中",off:"关闭中",error:"故障中，请维修"},
 			locate:"教四楼南门",
 			nowTime:"00:00:00",
-			timer:{out:null,inter:null}
+			timer:{out:null,inter:null},
+			cameraPos:require('../../../../render/controller/camera.js').position,
 		}},
 		props:
 		{
@@ -173,7 +174,12 @@ $colorBg : rgba(0,0,0,0.75);
 				var date = new Date();
 				return date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDay()+'日--';
 			},
-			pos() { return {x:this.tagPos.x,y:this.tagPos.y}; }
+			pos() 
+			{ 
+				// return {x:this.tagPos.x,y:this.tagPos.y};
+				var ranbingluan = this.cameraPos.x;
+				return getPos(this.tagPos);
+			}
 		},
 		methods:
 		{

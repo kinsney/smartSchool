@@ -60,7 +60,7 @@ const state =
 		{
 			Environment:
 			{ 
-				hardware:{aircon:true,roomLight:true},
+				hardware:{aircon:true,roomLight:true,curtain:true,gasPurifier:true},
 				panel:{weather:false} 
 			},
 			Security:
@@ -75,7 +75,7 @@ const state =
 			},
 			Asset:
 			{ 
-				hardware:{aircon:true,roomLight:true,camera:true,smogSensor:true,door:true,equipment:true,breaker:true},
+				hardware:{aircon:true,roomLight:true,camera:true,smogSensor:true,door:true,equipment:true,breaker:true,classBoard:true,},
 				panel:{asset:false} 
 			}
 		}

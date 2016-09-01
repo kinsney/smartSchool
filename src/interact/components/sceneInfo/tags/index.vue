@@ -11,18 +11,13 @@
 
 <template>
 	<div class="v-tags" mousedown.stop>
-		<template v-for="(key,val) in tags">
-			<component 
-				:is="key" 
-				v-for="item in val"
-
-				:toshow="hardware[key]"
-				:obj-name="item.obj" 
-				:state="item.state" 
-				:tag-pos="item.tagpos" 
-				:tag-data="item.data">
-			</component>
-		</template>
+		<component 
+			v-for="(key,val) in data"
+			:is="val.model"
+			:toshow="hardware[val.model]?true:false"
+			:obj-name="key" 
+			:tag-pos="val.position">
+		</component>
 	</div>
 </template>
 
@@ -30,27 +25,12 @@
 	module.exports =
 	{
 		data() {return{
-			tags:
-			{
-				// camera:
-				// [
-				// 	{obj:"nameOfObj",state:"on",tagpos:{x:100,y:100,z:0},data:{}},
-				// 	{obj:"nameOfObj",state:"on",tagpos:{x:300,y:100,z:0},data:{}}
-				// ],
-				// streetLight:
-				// [
-				// 	{obj:"nameOfObj",state:"on",tagpos:{x:100,y:300,z:0},data:{}},
-				// 	{obj:"nameOfObj",state:"error",tagpos:{x:300,y:300,z:0},data:{}}
-				// ],
-				// breaker:
-				// [
-				// 	{obj:"nameOfObj",state:"on",tagpos:{x:100,y:500,z:0},data:{}},
-				// 	{obj:"nameOfObj",state:"on",tagpos:{x:300,y:500,z:0},data:{}}
-				// ]
-				roomLight: 
-				[{obj:'building1-4-jiaoshideng',state:'on',tagpos:{x:200,y:700,z:-4342},data:{}} ]
-			}
+			
 		}},
+		props:
+		{
+			data: {type: Object, default:()=>{return {};}}
+		},
 		components:
 		{
 			aircon:require('./aircon.vue'),
@@ -61,7 +41,10 @@
 			equipment:require('./equipment.vue'),
 			streetLight:require('./streetLight.vue'),
 			roomLight:require('./roomLight.vue'),
-			smogSensor:require('./smogSensor.vue')
+			smogSensor:require('./smogSensor.vue'),
+			curtain:require('./curtain.vue'),
+			classBoard:require('./classBoard.vue'),
+			gasPurifier:require('./gasPurifier.vue'),
 		},
 		vuex:
 		{
@@ -70,19 +53,6 @@
 				scope: ({routeSite}) => {return routeSite.scope},
 				menu: ({routeSite}) => {return routeSite.menu},
 				hardware:({routeSite,selectors})=>selectors[routeSite.scope][routeSite.menu].hardware
-			}
-		},
-		computed:
-		{
-			scopeData() { return require('../../../../data.js')[this.scope]; },
-			tagData()
-			{
-				//根据 scope 和 menu 的值动态的去读取新的 tagData
-				//几种交互方式的实现
-				// 1 悬停出现：用objectname去匹配hoverobjectname————>到v-show上
-				// 2 按距离加载：直接用computed去计算与相机之间的距离————>到v-show上
-				// 3 按房间视角加载：name中包含room字段，匹配currentRoom————>到v-show上
-				
 			}
 		}
 	}

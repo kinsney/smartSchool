@@ -10,7 +10,7 @@ $size : 200px;
 {
 	position:absolute; right:$mathSide; bottom:$mathSide + $barH + $padBottom;
 	width:$size; height:$size;border: 2px solid $greenA;border-radius: 500px;
-	overflow:hidden;
+	overflow:hidden; background-color:rgba(245,250,245,0.5);
 
 	img{display:block; height:100%; width:100%;}
 	svg polygon:hover { fill:red; }

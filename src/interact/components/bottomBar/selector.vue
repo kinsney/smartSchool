@@ -103,7 +103,8 @@ $greenC : #6cf09c;
 			tagName: 
 			{
 				aircon:'空调', breaker:'断路器', camera:'摄像头', door:'门', energy:'能源',
-				equipment:'教学设备', streetLight:'路灯', roomLight:'室内灯', smogSensor:'烟雾传感'
+				equipment:'教学设备', streetLight:'路灯', roomLight:'室内灯', smogSensor:'烟雾传感',
+				classBoard:'班牌',gasPurifier:'净化器',curtain:'窗帘'
 			},
 			panelName:
 			{

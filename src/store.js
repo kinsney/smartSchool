@@ -1,9 +1,8 @@
 const Vue = require('vue')
 const THREE = require('three')
-const buildingsJson = require('./render/buildings.json')
+const buildingsJson = require('./dataModel/data.json')
 const actStore = require('./actStore')
-window.store = module.exports = new Vue(
-{
+window.store = module.exports = new Vue({
    data:
    {
       hoverEnabled: true,
@@ -29,10 +28,10 @@ window.store = module.exports = new Vue(
    },
    watch:
    {
-      'currentObjectName' (name)
-      {
+      'currentObjectName':function(name){
          //now position 0:'' 1:building 2:building-1
-         if(name){
+         if(name)
+         {
             var position = name.split('-')
             switch (position.length)
             {
@@ -66,8 +65,11 @@ window.store = module.exports = new Vue(
          }
       }
    },
-   created() {this.building.name = ''}
-})
+   ready() 
+   {
+      
+   }
+});
 
 
 

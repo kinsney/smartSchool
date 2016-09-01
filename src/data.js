@@ -11,14 +11,13 @@
  * 
 ——————————————————————————————————————————————————————————————**/
 
-var scopeCampus  = require('./dataModel/campus.json');
-var scopeBuiding = require('./dataModel/building.json');
-var scopeFloor   = require('./dataModel/floor.json');
-var globalInfo   = require('./dataModel/globalInfo.json');
+var scopeCampus  = require('./dataModel/campus.model.json');
+var scopeBuiding = require('./dataModel/building.model.json');
+var scopeFloor   = require('./dataModel/floor.model.json');
+var globalInfo   = require('./dataModel/globalInfo.model.json');
 
 /**
  * [根据后台传过来的值，动态修改model的值]
- * 
 **/
 function dynamicData()
 {

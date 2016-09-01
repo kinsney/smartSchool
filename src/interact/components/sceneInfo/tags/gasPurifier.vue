@@ -4,22 +4,23 @@ $red : #f85656;
 $black : #000000;
 $colorLine : #278d4c;
 $colorBg : rgba(0,0,0,0.75);
+$colorBt : #2fae5d;
 
 * { font-family: 'PingFang SC','微软雅黑' ;}
-.tag-breaker
+.tag-curtain
 {
 	position: absolute;
 	border:1px solid $red;
 	.info
 	{
-		position:absolute; bottom:25px; left:-82px;
-		width:130px;
+		position:absolute; bottom:25px; left:-87px;
+		width:140px;
 		padding:12px 17px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
 		border-bottom: 3px solid $green;
 		font-weight:lighter;
-		
+
 		.u
 		{
 			position: relative;
@@ -40,24 +41,41 @@ $colorBg : rgba(0,0,0,0.75);
 			width:100%; height:1px;
 			margin: 7px 0;
 			background-color: $colorLine;
-			span 
-			{ 
-				position:absolute; height:3px; width:3px;  
+			span
+			{
+				position:absolute; height:3px; width:3px;
 				border-radius: 4px;
 				background-color: $colorLine;
 			}
 			.dot-l { left:0; top:-1px; }
 			.dot-r { right:0; top:-1px; }
 		}
+		.btn
+		{
+			box-sizing:border-box;
+			padding:2px; margin: 0 0 7px;
+			border-radius:3px;
+			cursor: pointer;
+			.in
+			{
+				padding: 2px;
+				font-size:12px; color:white;
+				text-align:center;
+				min-width:80px; height:20px; line-height:20px;
+			}
+			&.btnon { border:1px solid $colorBt; .in{background-color:$colorBt;} }
+			&.btnoff { border:1px solid rgba(0,0,0,0.3); .in{background-color:rgba(0,0,0,0.3);} }
+		}
+		.btnOn { border:1px solid $colorBt; .in{background-color:$colorBt;} }
 		.v-dotline
 		{
 			position:absolute; bottom: -25px; left:50%;
 			width:1px; height:25px;
 			background-color: $green;
-			.dot 
-			{ 
+			.dot
+			{
 				position:absolute; left:-4px; bottom:0;
-				height:7px; width:7px;  
+				height:7px; width:7px;
 				border-radius: 4px;
 				background-color: $green;
 				border:1px solid black;
@@ -70,7 +88,6 @@ $colorBg : rgba(0,0,0,0.75);
 		}
 		&.on { @include state($green); }
 		&.off { @include state($black); }
-		&.error { @include state($red); }
 	}
 	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
 	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
@@ -78,13 +95,20 @@ $colorBg : rgba(0,0,0,0.75);
 </style>
 
 <template>
-	<div class="tag-breaker" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
+	<div class="tag-curtain" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop>
 		<div class="info" v-show="disShow" transition="tag" :class="state" v-el:info>
 			<div class="u">
-				<span v-text="'断路器:'+statetag[state]"></span>
+				<span v-show="state=='off'">窗帘关闭</span>
+				<span v-show="state=='on'">窗帘开启</span>
 				<img src="img/more.png" />
 			</div>
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
+			<div class="btn" :class="'btn'+state" @click="toggle">
+				<div class="in">
+					<span v-show="state=='off'">放下窗帘</span>
+					<span v-show="state=='on'">拉起窗帘</span>
+				</div>
+			</div>
 			<div class="d">
 				<img src="img/locate.png" />
 				<span v-text="locate"></span>
@@ -101,16 +125,14 @@ $colorBg : rgba(0,0,0,0.75);
 	module.exports =
 	{
 		data() {return{
-			isOpen:false,
-			statetag:{on:"正常",off:"已关闭",error:"故障"},
 			locate:"教四楼",
 			cameraPos:require('../../../../render/controller/camera.js').position,
 		}},
 		props:
 		{
 			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
-			state: { type:String, default:"on" }, // on error
-			objName: { type:String, default:"Breaker" },
+			state: { type:String, default:"on" }, // on off
+			objName: { type:String, default:"GasPurifier" },
 			tagData:{type: Object, default:()=>{return {};}},
 			toshow:{type:Boolean, default:true}
 		},
@@ -133,6 +155,16 @@ $colorBg : rgba(0,0,0,0.75);
 				else return true;
 			}
 		},
-		methods: {}
+		methods:
+		{
+			toggle()
+			{
+				this.state = (this.state=='on'?'off':'on');
+			}
+		},
+		ready()
+		{
+			
+		}
 	}
 </script>
