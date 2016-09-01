@@ -105,8 +105,8 @@ $colorBt : #2fae5d;
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
 			<div class="btn" :class="'btn'+state" @click="toggle">
 				<div class="in">
-					<span v-show="state=='off'">放下窗帘</span>
-					<span v-show="state=='on'">拉起窗帘</span>
+					<span v-show="state=='off'">拉起窗帘</span>
+					<span v-show="state=='on'">放下窗帘</span>
 				</div>
 			</div>
 			<div class="d">
@@ -161,11 +161,12 @@ $colorBt : #2fae5d;
 			toggle()
 			{
 				this.state = (this.state=='on'?'off':'on');
+				this.theCurtain.position.y = (this.state=='on'?438:238);
 			}
 		},
 		ready()
 		{
-			
+			this.state = (this.theCurtain.position.y==238 ? 'off':'on');
 		}
 	}
 </script>
