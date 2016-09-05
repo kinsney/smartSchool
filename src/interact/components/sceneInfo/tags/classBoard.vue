@@ -13,26 +13,45 @@ $colorBt : #2fae5d;
 	border:1px solid $red;
 	.info
 	{
-		position:absolute; bottom:25px; left:-87px;
-		width:140px;
+		position:absolute; bottom:25px; left:-367px;
+		width:420px;
 		padding:12px 17px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
 		border-bottom: 3px solid $green;
 		font-weight:lighter;
 
-		.u
+		.title
 		{
 			position: relative;
 			color: $green; font-size:16px;
-			*{display:inline-block; vertical-align:middle;}
-			img{ position:absolute; right:0; top:3px; height:15px; }
+			h3 {display:inline-block; font-size:20px; height:34px; line-height:34px;}
+			.btn
+			{
+				box-sizing:border-box; padding:2px; border:1px solid $colorBt;
+				position:absolute; right:0; top:0;
+				border-radius:3px; cursor: pointer; 
+				.in
+				{
+					padding: 2px; font-size:14px; color:white;
+					text-align:center; background-color:$colorBt;
+					min-width:90px; height:24px; line-height:24px;
+				}
+			}
 		}
-		.d
+		ul.classInfo li
 		{
-			color: white; font-size:14px; text-align: center;
-			*{display:inline-block; vertical-align:middle;}
-			img{height:14px; margin-right:10px;}
+			$H:36px; padding:3px 10px; height:$H;
+			span{display:block; box-sizing:border-box; float:left; height:$H; line-height:$H; 
+				font-size:16px; color:white;}
+			.key{width:20%;}
+			.val{width:80%; text-align:center; background-color:rgba(255,255,255,0.1);}
+		}
+		div.msg
+		{
+			margin:10px 10px 5px; padding:10px; background-color:rgba(255,255,255,0.1);
+			h4{font-size:18px; color:$green; text-align:center; margin-bottom:10px;}
+			p{color:white; font-size:14px; line-height:18px;}
 		}
 
 		.h-dotline
@@ -50,23 +69,7 @@ $colorBt : #2fae5d;
 			.dot-l { left:0; top:-1px; }
 			.dot-r { right:0; top:-1px; }
 		}
-		.btn
-		{
-			box-sizing:border-box;
-			padding:2px; margin: 0 0 7px;
-			border-radius:3px;
-			cursor: pointer;
-			.in
-			{
-				padding: 2px;
-				font-size:12px; color:white;
-				text-align:center;
-				min-width:80px; height:20px; line-height:20px;
-			}
-			&.btnon { border:1px solid $colorBt; .in{background-color:$colorBt;} }
-			&.btnoff { border:1px solid rgba(0,0,0,0.3); .in{background-color:rgba(0,0,0,0.3);} }
-		}
-		.btnOn { border:1px solid $colorBt; .in{background-color:$colorBt;} }
+			
 		.v-dotline
 		{
 			position:absolute; bottom: -25px; left:50%;
@@ -81,13 +84,6 @@ $colorBt : #2fae5d;
 				border:1px solid black;
 			}
 		}
-		@mixin state($color)
-		{
-			border-bottom-color:$color;
-			.v-dotline {background-color: $color; .dot {background-color: $color; } }
-		}
-		&.on { @include state($green); }
-		&.off { @include state($black); }
 	}
 	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
 	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
@@ -97,22 +93,32 @@ $colorBt : #2fae5d;
 <template>
 	<div class="tag-classBoard" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop>
 		<div class="info" v-show="disShow" transition="tag" :class="state" v-el:info>
-			<div class="u">
-				<span v-show="state=='off'">班牌</span>
-				<span v-show="state=='on'">班牌</span>
-				<img src="img/more.png" />
+			<div class="title">
+				<h3>教四楼202</h3>
+				<div class="btn" @click=""> <div class="in">所有课表</div> </div>
 			</div>
 			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
-			<div class="btn" :class="'btn'+state" @click="toggle">
-				<div class="in">
-					<span v-show="state=='off'">班牌</span>
-					<span v-show="state=='on'">班牌</span>
-				</div>
+			<ul class="classInfo" style="margin-bottom:20px;">
+				<li v-for="(key,val) in classInfo">
+					<span class="key" v-text="key"></span>
+					<span class="val" v-text="val"></span>
+				</li>
+			</ul>
+
+
+			<div class="title">
+				<h3>通知通告</h3>
+				<div class="btn" @click=""> <div class="in">所有通知</div> </div>
 			</div>
-			<div class="d">
-				<img src="img/locate.png" />
-				<span v-text="locate"></span>
+			<div class="h-dotline"><span class="dot-l"></span><span class="dot-r"></span></div>
+			<div class="msg">
+				<h4>关于中秋节放假的通知</h4>
+				<p>值中秋节来临之际，跟进国务院办公厅公布的《201*年节假日安排的通知》的有关规定，结合我公司实际情况，经领导班子研究，现将201*年中秋节放假事项通知如下：
+    			<br>一、中秋节放假时间为9月27日，共1天。
+    			<br>二、各部门接通知后，妥善安排好值班工作，并将各部门值班表于201*年*月*日下午17:00以前报公司办公室。
+    			<br>公司值班电话：********</p>
 			</div>
+			
 			<div class="v-dotline"><span class="dot"></span></div>
 		</div>
 	</div>
@@ -125,7 +131,7 @@ $colorBt : #2fae5d;
 	module.exports =
 	{
 		data() {return{
-			locate:"教四楼",
+			classInfo:{'教师人数':'30人','当前课程':'《数学》','上课学生':'高一(2)班','授课老师':'李老师','授课时间':'08:00--08:45',},
 			cameraPos:require('../../../../render/controller/camera.js').position,
 		}},
 		props:
@@ -157,10 +163,7 @@ $colorBt : #2fae5d;
 		},
 		methods:
 		{
-			toggle()
-			{
-				this.state = (this.state=='on'?'off':'on');
-			}
+			
 		},
 		ready()
 		{
