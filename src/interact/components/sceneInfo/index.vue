@@ -36,15 +36,12 @@
 				else return {};
 			}
 		},
-		watch:
-		{
-			// "tagsData":(val)=>{ console.dir(val); }
-		},
 		components:
 		{
 			infoSum:require('./infoSum/index.vue'),
 			tags:require('./tags/index.vue'),
-			panel:require('./panels/index.vue')
+			panel:require('./panels/index.vue'),
+			test:require('./tags/classBoard.vue'),
 		},
 		ready()
 		{
