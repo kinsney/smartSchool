@@ -46,8 +46,8 @@
 		ready()
 		{
 			var _this = this;
-			this.store.currentObjectName = 'building1';
-			setTimeout(()=>{_this.store.currentObjectName = 'building1-4';},10);
+			// this.store.currentObjectName = 'building1';
+			// setTimeout(()=>{_this.store.currentObjectName = 'building1-4';},10);
 		}
 	}
 </script>
