@@ -8,13 +8,13 @@ $colorBg : rgba(0,0,0,0.75);
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .tag-breaker
 {
-	position: absolute;
-	border:1px solid $red;
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
+
 	.info
 	{
-		position:absolute; bottom:25px; left:-82px;
-		width:130px;
-		padding:12px 17px;
+		position:absolute; bottom:60px; left:-82px;
+		padding:12px 17px; width:130px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
 		border-bottom: 3px solid $green;
@@ -72,14 +72,21 @@ $colorBg : rgba(0,0,0,0.75);
 		&.off { @include state($black); }
 		&.error { @include state($red); }
 	}
-	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
-	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="tag-breaker" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
-		<div class="info" v-show="disShow" transition="tag" :class="state" v-el:info>
+	<div class="tag-breaker" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop @mouseenter="show" @mouseleave="hide">
+		<div class="tag" transition="tag" v-show="disShow">
+			<img v-if="state=='on'" src="img/breaker-on.png" />
+			<img v-if="state=='off'" src="img/breaker-off.png" />
+			<img v-if="state=='error'" src="img/breaker-err.png" />
+		</div>
+		<div class="info" :class="state" v-show="infoShow" transition="info" v-el:info>
 			<div class="u">
 				<span v-text="'断路器:'+statetag[state]"></span>
 				<img src="img/more.png" />
@@ -105,10 +112,12 @@ $colorBg : rgba(0,0,0,0.75);
 			statetag:{on:"正常",off:"已关闭",error:"故障"},
 			locate:"教四楼",
 			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			tagPos: {type: Object, default:()=>{return { x:400,y:600,z:0};}},
 			state: { type:String, default:"on" }, // on error
 			objName: { type:String, default:"Breaker" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -124,6 +133,7 @@ $colorBg : rgba(0,0,0,0.75);
 			},
 			disShow()
 			{
+				// return true;
 				var deltaX = this.cameraPos.x-this.tagPos.x;
 				var deltaY = this.cameraPos.y-this.tagPos.y;
 				var deltaZ = this.cameraPos.z-this.tagPos.z;
@@ -133,6 +143,10 @@ $colorBg : rgba(0,0,0,0.75);
 				else return true;
 			}
 		},
-		methods: {}
+		methods: 
+		{
+			show() {clearTimeout(this.timer); this.infoShow=true; },
+			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
+		}
 	}
 </script>

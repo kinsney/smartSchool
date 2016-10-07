@@ -41,7 +41,6 @@
 			infoSum:require('./infoSum/index.vue'),
 			tags:require('./tags/index.vue'),
 			panel:require('./panels/index.vue'),
-			test:require('./tags/classBoard.vue'),
 		},
 		ready()
 		{

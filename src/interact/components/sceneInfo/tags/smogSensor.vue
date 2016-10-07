@@ -7,8 +7,9 @@ $colorBg : rgba(0,0,0,0.75);
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .smog-sensor
 {
-	position: absolute;
-	border:1px solid $red;
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
+
 	.info
 	{
 		position:absolute; bottom:25px; left:-82px;
@@ -77,14 +78,21 @@ $colorBg : rgba(0,0,0,0.75);
 		&.on { @include state($green); }
 		&.error { @include state($red); }
 	}
-	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
-	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="smog-sensor" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
-		<div class="info" v-show="disShow" transition="tag" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
+	<div class="smog-sensor" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop @mouseenter="show" @mouseleave="hide">
+		<div class="tag" transition="tag" v-show="disShow">
+			<img v-if="state=='on'" src="img/smogSensor-on.png" />
+			<img v-if="state=='off'" src="img/smogSensor-off.png" />
+			<img v-if="state=='error'" src="img/smogSensor-err.png" />
+		</div>
+		<div class="info" v-show="infoShow" transition="info" :class="state" @mouseenter="slideUp" @mouseleave="slideDown" v-el:info>
 			<div class="u">
 				<span>烟雾传感器</span>
 				<img src="img/more.png" />
@@ -114,10 +122,12 @@ $colorBg : rgba(0,0,0,0.75);
 			locate:"教四楼",
 			danger: { type:Boolean, default:false },
 			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			tagPos: {type: Object, default:()=>{return { x:400,y:600,z:0};}},
 			state: { type:String, default:"on" }, // on error
 			objName: { type:String, default:"SmogSensor" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -133,6 +143,7 @@ $colorBg : rgba(0,0,0,0.75);
 			},
 			disShow()
 			{
+				// return true;
 				var deltaX = this.cameraPos.x-this.tagPos.x;
 				var deltaY = this.cameraPos.y-this.tagPos.y;
 				var deltaZ = this.cameraPos.z-this.tagPos.z;
@@ -144,18 +155,20 @@ $colorBg : rgba(0,0,0,0.75);
 		},
 		methods:
 		{
-			hide() 
+			slideDown() 
 			{
 				if(this.state=='error') return;
 				var ele = this.$els.info;
 				$(ele).find('.smogData').stop().animate({height:0});
 			},
-			show() 
+			slideUp() 
 			{
 				if(this.state=='error') return;
 				var ele = this.$els.info;
 				$(ele).find('.smogData').stop().animate({height:'42px'});
-			}
+			},
+			show() { clearTimeout(this.timer); this.infoShow=true; },
+			hide() { var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		}
 	}
 </script>

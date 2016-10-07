@@ -9,13 +9,13 @@ $colorBt : #2fae5d;
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .tag-Aircon
 {
-	position: absolute;
-	border:1px solid $red;
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
+	
 	.info
 	{
-		position:absolute; bottom:25px; left:-87px;
-		width:140px;
-		padding:12px 17px;
+		position:absolute; left:-87px;
+		width:140px; padding:12px 17px;
 		background-color: $colorBg;
 		border-radius: 3px 3px 0 0;
 		border-bottom: 3px solid $green;
@@ -118,14 +118,21 @@ $colorBt : #2fae5d;
 		&.off { @include state($black); }
 		&.error { @include state($red); }
 	}
-	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
-	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="tag-Aircon" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
-		<div class="info" v-show="disShow" transition="tag" :class="state" @mouseenter="show" @mouseleave="hide" v-el:info>
+	<div class="tag-Aircon" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop @mouseenter="show" @mouseleave="hide">
+		<div class="tag" transition="tag" v-show="disShow">
+			<img v-if="state=='on'" src="img/aircon-on.png" />
+			<img v-if="state=='off'" src="img/aircon-off.png" />
+			<img v-if="state=='error'" src="img/aircon-err.png" />
+		</div>
+		<div class="info" :class="state" v-show="infoShow" transition="info" @mouseenter="slideUp" @mouseleave="slideDown" v-el:info>
 			<div class="u">
 				<span>空调</span>
 				<img src="img/more.png" />
@@ -186,10 +193,12 @@ $colorBt : #2fae5d;
 			mode:0,
 			modelist:['制冷','制热','换气','净化'],
 			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			tagPos: {type: Object, default:()=>{return { x:400,y:600,z:0};}},
 			state: { type:String, default:"on" }, // on off error
 			objName: { type:String, default:"Aircondition" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -205,6 +214,7 @@ $colorBt : #2fae5d;
 			},
 			disShow()
 			{
+				// return true;
 				var deltaX = this.cameraPos.x-this.tagPos.x;
 				var deltaY = this.cameraPos.y-this.tagPos.y;
 				var deltaZ = this.cameraPos.z-this.tagPos.z;
@@ -216,13 +226,13 @@ $colorBt : #2fae5d;
 		},
 		methods:
 		{
-			hide() 
+			slideDown() 
 			{
 				if(this.state!='on') return;
 				var ele = this.$els.info;
 				$(ele).find('.controls').stop().animate({height:0});
 			},
-			show() 
+			slideUp() 
 			{
 				if(this.state!='on') return;
 				var ele = this.$els.info;
@@ -236,7 +246,9 @@ $colorBt : #2fae5d;
 				var ele = this.$els.info;
 				if(this.state=='on') $(ele).find('.controls').stop().animate({height:'100px'});
 				else $(ele).find('.controls').stop().animate({height:0});
-			}
+			},
+			show() {clearTimeout(this.timer); this.infoShow=true; },
+			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		}
 	}
 </script>

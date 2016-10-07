@@ -9,8 +9,8 @@ $colorBt : #2fae5d;
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .tag-curtain
 {
-	position: absolute;
-	border:1px solid $red;
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
 	.info
 	{
 		position:absolute; bottom:25px; left:-87px;
@@ -89,14 +89,20 @@ $colorBt : #2fae5d;
 		&.on { @include state($green); }
 		&.off { @include state($black); }
 	}
-	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
-	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="tag-curtain" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop>
-		<div class="info" v-show="disShow" transition="tag" :class="state" v-el:info>
+	<div class="tag-curtain" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop @mouseenter="show" @mouseleave="hide">
+		<div class="tag" transition="tag" v-show="disShow">
+			<img v-if="state=='on'" src="img/curtain-on.png" />
+			<img v-if="state=='off'" src="img/curtain-off.png" />
+		</div>
+		<div class="info" v-show="infoShow" transition="info" :class="state" v-el:info>
 			<div class="u">
 				<span v-show="state=='off'">窗帘已关闭</span>
 				<span v-show="state=='on'">窗帘已开启</span>
@@ -127,10 +133,12 @@ $colorBt : #2fae5d;
 		data() {return{
 			locate:"教四楼",
 			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			tagPos: {type: Object, default:()=>{return { x:400,y:600,z:0};}},
 			state: { type:String, default:"on" }, // on off
 			objName: { type:String, default:"Curtain" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -144,9 +152,9 @@ $colorBt : #2fae5d;
 				var ranbingluan = this.cameraPos.x;
 				return getPos(this.tagPos);
 			},
-			theCurtain(){ return require('../../../../store.js').devices[this.objName]; },
 			disShow()
 			{
+				// return true;
 				var deltaX = this.cameraPos.x-this.tagPos.x;
 				var deltaY = this.cameraPos.y-this.tagPos.y;
 				var deltaZ = this.cameraPos.z-this.tagPos.z;
@@ -154,7 +162,8 @@ $colorBt : #2fae5d;
 				var dis = Math.sqrt(deltaX*deltaX+deltaY*deltaY+deltaZ*deltaZ);
 				if(dis>5000) return false;
 				else return true;
-			}
+			},
+			theCurtain(){ return require('../../../../store.js').devices[this.objName]; },
 		},
 		methods:
 		{
@@ -162,7 +171,9 @@ $colorBt : #2fae5d;
 			{
 				this.state = (this.state=='on'?'off':'on');
 				this.theCurtain.position.y = (this.state=='on'?438:238);
-			}
+			},
+			show() {clearTimeout(this.timer); this.infoShow=true; },
+			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		},
 		ready()
 		{

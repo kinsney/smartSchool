@@ -9,11 +9,12 @@ $colorBt : #2fae5d;
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .tag-classBoard
 {
-	position: absolute;
-	border:1px solid $red;
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
+
 	.info
 	{
-		position:absolute; bottom:25px; left:-367px;
+		position:absolute; bottom:25px; left:-227px;
 		width:420px;
 		padding:12px 17px;
 		background-color: $colorBg;
@@ -85,14 +86,21 @@ $colorBt : #2fae5d;
 			}
 		}
 	}
-	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
-	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="tag-classBoard" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop>
-		<div class="info" v-show="disShow" transition="tag" :class="state" v-el:info>
+	<div class="tag-classBoard" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop @mouseenter="show" @mouseleave="hide">
+		<div class="tag" transition="tag" v-show="disShow">
+			<img v-if="state=='on'" src="img/classBoard-on.png" />
+			<img v-if="state=='off'" src="img/classBoard-off.png" />
+			<img v-if="state=='error'" src="img/classBoard-err.png" />
+		</div>
+		<div class="info" v-show="infoShow" transition="info" :class="state" v-el:info>
 			<div class="title">
 				<h3>教四楼202</h3>
 				<div class="btn" @click=""> <div class="in">所有课表</div> </div>
@@ -133,10 +141,12 @@ $colorBt : #2fae5d;
 		data() {return{
 			classInfo:{'教师人数':'30人','当前课程':'《数学》','上课学生':'高一(2)班','授课老师':'李老师','授课时间':'08:00--08:45',},
 			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			tagPos: {type: Object, default:()=>{return { x:600,y:700,z:0};}},
 			state: { type:String, default:"on" }, // on off
 			objName: { type:String, default:"ClassBoard" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -152,6 +162,7 @@ $colorBt : #2fae5d;
 			},
 			disShow()
 			{
+				// return true;
 				var deltaX = this.cameraPos.x-this.tagPos.x;
 				var deltaY = this.cameraPos.y-this.tagPos.y;
 				var deltaZ = this.cameraPos.z-this.tagPos.z;
@@ -163,11 +174,8 @@ $colorBt : #2fae5d;
 		},
 		methods:
 		{
-			
-		},
-		ready()
-		{
-			
+			show() {clearTimeout(this.timer); this.infoShow=true; },
+			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		}
 	}
 </script>

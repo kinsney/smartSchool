@@ -9,8 +9,8 @@ $colorBg : rgba(0,0,0,0.75);
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .tag-energy
 {
-	position: absolute;
-	border:1px solid $red;
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
 	.info
 	{
 		position:absolute; bottom:25px; left:-82px;
@@ -72,14 +72,19 @@ $colorBg : rgba(0,0,0,0.75);
 			}
 		}
 	}
-	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:25px;}
-	.tag-enter, .tag-leave { opacity: 0; bottom:0;}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="tag-energy" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop="">
-		<div class="info" v-show="disShow" transition="tag" @mouseenter="show" @mouseleave="hide" v-el:info>
+	<div class="tag-energy" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mousedown.stop @mouseenter="show" @mouseleave="hide">
+		<div class="tag" transition="tag" v-show="disShow">
+			<img v-if="state=='on'" src="img/energy-on.png" />
+		</div>
+		<div class="info" v-show="infoShow" transition="info" @mouseenter="openInfo" @mouseleave="shutInfo" v-el:info>
 			<div class="u">
 				<span v-show="!open" v-text="'日均能耗:'+energy"></span>
 				<span v-show="open">能耗趋势表</span>
@@ -107,11 +112,13 @@ $colorBg : rgba(0,0,0,0.75);
 			energy:"8476J",
 			open:false,
 			locate:"教四楼",
-			cameraPos:require('../../../../render/controller/camera.js').position
+			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:0,y:5000,z:0 };}},
+			tagPos: {type: Object, default:()=>{return { x:400,y:600,z:0};}},
 			state: { type:String, default:"on" }, // this tag has no state
 			objName: { type:String, default:"Energy" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -127,6 +134,7 @@ $colorBg : rgba(0,0,0,0.75);
 			},
 			disShow()
 			{
+				// return true;
 				var deltaX = this.cameraPos.x-this.tagPos.x;
 				var deltaY = this.cameraPos.y-this.tagPos.y;
 				var deltaZ = this.cameraPos.z-this.tagPos.z;
@@ -138,19 +146,22 @@ $colorBg : rgba(0,0,0,0.75);
 		},
 		methods:
 		{
-			hide() 
+			shutInfo() 
 			{ 
 				this.open = false;
 				var ele = this.$els.info;
 				$(ele).stop().animate({width:'130px',left:'-82px'});
 				$(ele).find('.energyData').stop().animate({height:0,marginBottom:0});
 			},
-			show() 
+			openInfo() 
 			{
+				this.open=true
 				var ele = this.$els.info;
 				$(ele).stop().animate({width:'280px',left:'-157px'});
-				$(ele).find('.energyData').stop().animate({height:'150px',marginBottom:'7px'},()=>this.open=true);
-			}
+				$(ele).find('.energyData').stop().animate({height:'150px',marginBottom:'7px'});
+			},
+			show() {clearTimeout(this.timer); this.infoShow=true; },
+			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		}
 	}
 </script>

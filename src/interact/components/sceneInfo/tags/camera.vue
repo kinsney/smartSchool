@@ -8,9 +8,9 @@ $colorBg : rgba(0,0,0,0.75);
 * { font-family: 'PingFang SC','微软雅黑' ;}
 .tag-camera
 {
-	position: absolute;
-	height:100px;
-	.tag { height:100%; img{height:100%;} }
+	position: absolute; height:0; width:0;
+	.tag { position:absolute; height:60px; left:-25px; img{height:100%;} }
+
 	@mixin state($color)
 	{
 		border-bottom-color:$color;
@@ -18,8 +18,8 @@ $colorBg : rgba(0,0,0,0.75);
 	}
 	@mixin infoBox($w)
 	{
-		position:absolute; bottom:70px; left:26px - ($w / 2);
-		display:none; opacity:0; filter:alpha(opacity=0);
+		position:absolute; bottom:65px; left:-18px - ($w / 2);
+		transition:ease 0.5s; opacity:0;
 		width:$w;
 		padding:12px 17px;
 		background-color: $colorBg;
@@ -105,17 +105,22 @@ $colorBg : rgba(0,0,0,0.75);
 
 		&.on { @include state($green); }
 	}
+	.tag-transition {transition:ease 0.5s;opacity: 1; bottom:0;}
+	.tag-enter, .tag-leave { opacity: 0; bottom:-25px;}
+	.info-transition {transition:ease 0.5s;opacity: 1;  bottom:82px;}
+	.info-enter, .info-leave { opacity: 0; bottom:62px;}
 }
 </style>
 
 <template>
-	<div class="tag-camera" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}" @mouseleave="hide" @mousedown.stop="">
-		<div class="tag" @mouseenter="show">
+	<div class="tag-camera" :class="{hovered:hovered}" v-show="toshow" :style="{left:pos.x+'px',top:pos.y+'px'}"
+		@mouseenter="show" @mouseleave="hide" @mousedown.stop>
+		<div class="tag"  transition="tag" v-show="disShow">
 			<img v-if="state=='on'" src="img/camera-on.png" />
 			<img v-if="state=='off'" src="img/camera-off.png" />
-			<img v-if="state=='error'" src="img/camera-error.png" />
+			<img v-if="state=='error'" src="img/camera-err.png" />
 		</div>
-		<div v-if="!isOn" class="info" :class="isOn?'':state" v-el:info>
+		<div v-if="!isOn" class="info" v-show="infoShow" transition="info" :class="isOn?'':state">
 			<div class="u">
 				<span v-text="statetag[state]"></span>
 				<img src="img/more.png" />
@@ -127,7 +132,7 @@ $colorBg : rgba(0,0,0,0.75);
 			</div>
 			<div class="v-dotline"><span class="dot"></span></div>
 		</div>
-		<div v-if="isOn" class="video on" v-el:info>
+		<div v-if="isOn" class="video on" v-show="infoShow" transition="info">
 			<div class="top">
 				<img src="img/locate.png" />
 				<span v-text="locate"></span>
@@ -155,12 +160,13 @@ $colorBg : rgba(0,0,0,0.75);
 			statetag:{on:"开启中",off:"关闭中",error:"故障中，请维修"},
 			locate:"教四楼南门",
 			nowTime:"00:00:00",
-			timer:{out:null,inter:null},
 			cameraPos:require('../../../../render/controller/camera.js').position,
+			timer:null,
+			infoShow:false,
 		}},
 		props:
 		{
-			tagPos: {type: Object, default:()=>{return { x:200,y:300,z:0};}},
+			tagPos: {type: Object, default:()=>{return { x:400,y:600,z:0};}},
 			state: { type:String, default:"on" }, // on off error
 			objName: { type:String, default:"Camera" },
 			tagData:{type: Object, default:()=>{return {};}},
@@ -179,34 +185,28 @@ $colorBg : rgba(0,0,0,0.75);
 				// return {x:this.tagPos.x,y:this.tagPos.y};
 				var ranbingluan = this.cameraPos.x;
 				return getPos(this.tagPos);
+			},
+			disShow()
+			{
+				// return true;
+				var deltaX = this.cameraPos.x-this.tagPos.x;
+				var deltaY = this.cameraPos.y-this.tagPos.y;
+				var deltaZ = this.cameraPos.z-this.tagPos.z;
+
+				var dis = Math.sqrt(deltaX*deltaX+deltaY*deltaY+deltaZ*deltaZ);
+				if(dis>5000) return false;
+				else return true;
 			}
 		},
 		methods:
 		{
-			hide() 
-			{ 
-				var ele = this.$els.info
-				this.timer.out = setTimeout(function()
-				{
-					$(ele).stop().fadeOut(100,function(){$(this).css({opacity:0,bottom:'70px'});});
-				},100);
-
-				clearInterval(this.timer.inter);
-			},
-			show() 
-			{
-				var ele = this.$els.info
-				clearTimeout(this.timer.out);
-				$(ele).stop().css({display:'block'}).animate({opacity:1,bottom:'90px'},300);
-
-				this.getTime(); var _this = this;
-				this.timer.inter = setInterval(function(){_this.getTime();},1000);
-			},
 			getTime()
 			{
 				var date = new Date();
 				this.nowTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-			}
+			},
+			show() {clearTimeout(this.timer); this.infoShow=true; },
+			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		}
 	}
 </script>
