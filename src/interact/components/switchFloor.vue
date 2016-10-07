@@ -15,11 +15,11 @@
 
 <template>
 	<div class="v-switchFloor" v-if="scope=='floor'" @mousedown.stop="">
-		<div class="up" @click="building.currentFloor++">
+		<div class="up" @click="building.currentFloor==4||building.currentFloor++">
 			<img src="./img/up.png" />
 		</div>
 		<div><span v-text="'第'+(building.currentFloor+1)+'层'"></span></div>
-		<div class="down" @click="building.currentFloor--">
+		<div class="down" @click="building.currentFloor==0||building.currentFloor--">
 			<img src="./img/down.png" />
 		</div>
 	</div>
@@ -39,11 +39,7 @@
 			}
 		},
 		methods:
-		{
-			switch()
-			{
-
-			}
+		{		
 		}
 	}
 </script>

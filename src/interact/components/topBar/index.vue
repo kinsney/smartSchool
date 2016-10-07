@@ -165,11 +165,11 @@ $marginSide : 30px;
 		<div class="rightPart">
 			<img class="logo" src="./img/logo.png" />
 		</div>
-		<ul class="switch" v-el:switch>
+		<!-- <ul class="switch" v-el:switch>
 			<li :class="{now:scope=='campus'}">campus</li>
 			<li :class="{now:scope=='building'}">building</li>
 			<li :class="{now:scope=='floor'}">floor</li>
-		</ul>
+		</ul> -->
 		<goback></goback>
 	</div>
 	<login-box></login-box>
@@ -204,7 +204,7 @@ $marginSide : 30px;
 		},
 		ready()
 		{
-			var ele = this.$els.switch;
+			/*var ele = this.$els.switch;
 			var $store = this.$store;
 			$(ele).find('li').click(function()
 			{
@@ -212,7 +212,7 @@ $marginSide : 30px;
 				$(ele).find('.now').removeClass('now');
 				$(this).addClass('now');
 				$store.dispatch('SetRoutSite',{scope:text});
-			});
+			});*/
 		}
 	}
 </script>

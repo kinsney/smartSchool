@@ -41,13 +41,12 @@
 			infoSum:require('./infoSum/index.vue'),
 			tags:require('./tags/index.vue'),
 			panel:require('./panels/index.vue'),
-			test:require('./tags/classBoard.vue'),
 		},
 		ready()
 		{
 			var _this = this;
-			this.store.currentObjectName = 'building1';
-			setTimeout(()=>{_this.store.currentObjectName = 'building1-4';},10);
+			// this.store.currentObjectName = 'building1';
+			// setTimeout(()=>{_this.store.currentObjectName = 'building1-4';},10);
 		}
 	}
 </script>
