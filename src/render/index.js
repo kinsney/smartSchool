@@ -36,9 +36,14 @@ actStore.watch('routeSite.scope',(newScn) =>
   if (newScn == 'campus'){
     window.scene = nowScene = zone;
     window.area = nowArea = zone_area;
+    camera.position.set(0,20000,12000);
+    controller.target.set(0, 0, -20000)
+
   }else{
     window.scene = nowScene = table;
     window.area = nowArea = table_area
+    camera.position.set(0,15000,15000);
+    controller.target.set(0, 0,0)
   }
 })
 

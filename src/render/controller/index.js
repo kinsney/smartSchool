@@ -25,11 +25,4 @@ Object.assign(controls, {
   autoRotate:false
 })
 
-controls.target.set(0, 1000, 0)
-
-
-
-
-
-
-
+controls.target.set(0, 0, -20000)
