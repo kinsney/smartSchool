@@ -10,7 +10,7 @@ const scene = exports.scene  = new THREE.Scene();
 const area = exports.area = new THREE.Object3D();
 area.add(floors,devices);
 area.name  = "table_area"
-scene.add(environment,area,myAxes);
+scene.add(environment,area);
 scene.name = "table";
 
 
