@@ -12,7 +12,7 @@ const table_area = require('./table').area;
 
 const actStore = require('../actStore')
 //添加性能查看器到场景
-document.body.appendChild(stats.domElement);
+// document.body.appendChild(stats.domElement);
 //获取场景的canvasDom容器
 const schoolDom = document.querySelector('#school');
 
