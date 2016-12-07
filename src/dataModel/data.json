@@ -39,7 +39,7 @@
                     "model":"gasPurifier"
                 },
                 "jiaoshi_window":{
-                    "position":{"x":5206, "y":238, "z":-2732 },
+                    "position":{"x":5206, "y":275, "z":-2732 },
                     "rotation":{"x":0, "y":0, "z":0 },
                     "model":"curtain"
                 },
@@ -59,7 +59,7 @@
                     "model":"door"
                 },
                 "jifang_window1":{
-                    "position":{"x":1555, "y":238, "z":-2732 },
+                    "position":{"x":1555, "y":275, "z":-2732 },
                     "rotation":{"x":0, "y":0, "z":0 },
                     "model":"curtain"
                 },

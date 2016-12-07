@@ -170,14 +170,14 @@ $colorBt : #2fae5d;
 			toggle()
 			{
 				this.state = (this.state=='on'?'off':'on');
-				this.theCurtain.position.y = (this.state=='on'?438:238);
+				this.theCurtain.position.y = (this.state=='on'?438:275);
 			},
 			show() {clearTimeout(this.timer); this.infoShow=true; },
 			hide() {var _this=this; this.timer=setTimeout(()=>{_this.infoShow=false;},500); }
 		},
 		ready()
 		{
-			this.state = (this.theCurtain.position.y==238 ? 'off':'on');
+			this.state = (this.theCurtain.position.y==275 ? 'off':'on');
 		}
 	}
 </script>

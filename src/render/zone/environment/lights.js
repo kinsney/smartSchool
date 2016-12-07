@@ -54,7 +54,7 @@ sun.add(spotLight);
 sun.position.set(0,50000,0);
 
 //定义一个半球光
-var hemiLight = new THREE.HemisphereLight( 0x1496FF, 0xE7E7E7, 0.2 );
+var hemiLight = new THREE.HemisphereLight( 0xFFFFFF, 0x888888, 0.5 );
 
 //定义一个环境光
 var ambientLight = new THREE.AmbientLight('#191919')

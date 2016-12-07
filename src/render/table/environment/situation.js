@@ -9,7 +9,7 @@ makeSkyBox('type1',situation);
 
 // create the ground plane for test
 var planeGeometry = new THREE.PlaneGeometry(200000, 200000, 20, 20);
-var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff });
+var planeMaterial = new THREE.MeshLambertMaterial({color: 0x506269 });
 var plane = new THREE.Mesh(planeGeometry, planeMaterial);
 plane.receiveShadow = true;
 plane.rotation.x = -Math.PI / 2.0;

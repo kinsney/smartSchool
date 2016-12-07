@@ -8,9 +8,9 @@ const lights = module.exports = new THREE.Object3D()
 var target = new THREE.Object3D();
 target.position.set( 0, 0, 0 );
 
-const spotLight = Object.assign(new THREE.SpotLight(0xFFFFFF,1), 
+const spotLight = Object.assign(new THREE.SpotLight(0xFFFFFF,.5),
 {
-	distance:0,					//光强会从光源位置到distance距离线性衰减为0-------distance：0表示无限远
+	// distance:.1,					//光强会从光源位置到distance距离线性衰减为0-------distance：0表示无限远
 	angle:Math.PI/3,
 	exponent:10,				//光强从聚光中心向外的衰减度
 	decay:1,
@@ -22,7 +22,7 @@ Object.assign(spotLight.shadow,
 	radius:1,
 	camera: new THREE.PerspectiveCamera( 90, 1, 0, 0 )  //fov aspect near far
 });
-spotLight.position.set(0, 10000, 0)
+spotLight.position.set(0, 20000, 0)
 
 //定义一个方向光-----环境的投影主光源
 var nowHour = (new Date()).getHours();
@@ -54,9 +54,9 @@ sun.position.set(sunPosX,sunPosY,20000);
 
 
 //定义一个半球光
-var hemiLight = new THREE.HemisphereLight( 0x1496FF, 0xE7E7E7, 0.2 );
+var hemiLight = new THREE.HemisphereLight( 0xFFFFFF, 0x888888, .75 );
 //定义一个环境光
-var ambientLight = new THREE.AmbientLight('#191919')
+var ambientLight = new THREE.AmbientLight('0xFFFFFF')
 
 
 lights.add(hemiLight,ambientLight,downLight)
