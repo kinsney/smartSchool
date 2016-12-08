@@ -11,7 +11,8 @@
                 "jiaoshideng":{
                     "position":{"x":4342, "y":540, "z":-1500 },
                     "rotation":{"x":0, "y":0, "z":0 },
-                    "model":"roomLight"
+                    "model":"roomLight",
+                    "state":"error"
                 },
                 "jiaoshi_door":{
                     "position":{"x":5781, "y":11, "z":-435 },
@@ -66,7 +67,8 @@
                 "jifang_yankong":{
                     "position":{"x":-289, "y":544, "z":-1599 },
                     "rotation":{"x":0, "y":0, "z":0 },
-                    "model":"smogSensor"
+                    "model":"smogSensor",
+                    "state":"error"
                 },
                 "jifang_condition":{
                     "position":{"x":2372, "y":10, "z":-2619 },

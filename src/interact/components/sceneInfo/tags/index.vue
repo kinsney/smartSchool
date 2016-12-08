@@ -16,7 +16,8 @@
 			:is="val.model"
 			:toshow="hardware[val.model]?true:false"
 			:obj-name="key" 
-			:tag-pos="val.position">
+			:tag-pos="val.position"
+			:state="val.state||'off'">
 		</component>
 	</div>
 </template>
